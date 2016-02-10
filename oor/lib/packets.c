@@ -282,7 +282,7 @@ pkt_tuple_hash(packet_tuple_t *tuple)
         tuples = xmalloc(len * sizeof(uint32_t));
         lisp_addr_copy_to(&tuples[0], &tuple->src_addr);
         lisp_addr_copy_to(&tuples[1], &tuple->dst_addr);
-        tuples[2] = port;
+        tuples[2] = port+1;
         tuples[3] = tuple->protocol;
         tuples[4] = tuple->iid;
         break;
