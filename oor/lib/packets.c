@@ -301,11 +301,11 @@ pkt_tuple_hash(packet_tuple_t *tuple)
         tuples[10] = tuple->iid;
         break;
     }
+    OOR_LOG(LDBG_2, "pkt_parse_5_tuple: %d", tuples[2]);
 
     /* XXX: why 2013 used as initial value? */
     hash = hashword(tuples, len, 2013);
     free(tuples);
-    OOR_LOG(LDBG_2, "pkt_parse_5_tuple: %d", tuples[4]);
     return (hash);
 
 }
