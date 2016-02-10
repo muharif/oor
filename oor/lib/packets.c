@@ -282,7 +282,7 @@ pkt_tuple_hash(packet_tuple_t *tuple)
         tuples = xmalloc(len * sizeof(uint32_t));
         lisp_addr_copy_to(&tuples[0], &tuple->src_addr);
         lisp_addr_copy_to(&tuples[1], &tuple->dst_addr);
-        tuples[2] = port+1;
+        tuples[2] = port;
         tuples[3] = tuple->protocol;
         tuples[4] = tuple->iid;
         break;
@@ -305,7 +305,7 @@ pkt_tuple_hash(packet_tuple_t *tuple)
     /* XXX: why 2013 used as initial value? */
     hash = hashword(tuples, len, 2013);
     free(tuples);
-    OOR_LOG(LDBG_2, "pkt_parse_5_tuple: %d", tuples[2]);
+    OOR_LOG(LDBG_2, "pkt_parse_5_tuple: %d", tuples[3]);
     return (hash);
 
 }
