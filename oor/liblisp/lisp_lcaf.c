@@ -130,13 +130,17 @@ lcaf_addr_new_type(uint8_t type)
     switch(type) {
         case LCAF_IID:
             lcaf->addr = iid_type_new();
+            OOR_LOG(LDBG_2, "lcaf_type: IID");
             break;
         case LCAF_MCAST_INFO:
             lcaf->addr = mc_type_new();
+            OOR_LOG(LDBG_2, "lcaf_type: MC");
             break;
         case LCAF_GEO:
+        	OOR_LOG(LDBG_2, "lcaf_type: GEO");
             break;
         default:
+        	OOR_LOG(LDBG_2, "lcaf_type: MBUH");
             break;
     }
 
