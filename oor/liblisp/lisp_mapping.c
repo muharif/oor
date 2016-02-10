@@ -61,7 +61,7 @@ mapping_new_init(lisp_addr_t *eid)
     }
 
     lisp_addr_copy(&(mapping->eid_prefix), eid);
-    OOR_LOG(LDBG_2, "lcaf_type: %d", eid);
+    OOR_LOG(LDBG_2, "lcaf_type: %p", *eid);
 
     return (mapping);
 }
