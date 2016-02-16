@@ -215,7 +215,7 @@ ms_recv_map_request(lisp_ms_t *ms, lbuf_t *buf, uconn_t *uc)
     b = *buf;
 
     seid = lisp_addr_new();
-
+    OOR_LOG(LDBG_1, "get_locator_from_lcaf: wkwkwkwkwkw");
 
     mreq_hdr = lisp_msg_pull_hdr(&b);
 
