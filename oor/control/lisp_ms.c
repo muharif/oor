@@ -72,8 +72,6 @@ get_etr_from_lcaf(lisp_addr_t *laddr, lisp_addr_t **dst)
     elp_node_t *enode;
 
     lcaf = lisp_addr_get_lcaf(laddr);
-    OOR_LOG(LDBG_1, "get_locator_from_lcaf: Type %!, ",
-                    lcaf_addr_get_type(lcaf));
     switch (lcaf_addr_get_type(lcaf)) {
     case LCAF_EXPL_LOC_PATH:
         /* we're looking for the ETR, so the destination is the last elp hop */
@@ -215,7 +213,7 @@ ms_recv_map_request(lisp_ms_t *ms, lbuf_t *buf, uconn_t *uc)
     b = *buf;
 
     seid = lisp_addr_new();
-    OOR_LOG(LDBG_1, "get_locator_from_lcaf: wkwkwkwkwkw");
+
 
     mreq_hdr = lisp_msg_pull_hdr(&b);
 

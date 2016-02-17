@@ -139,6 +139,9 @@ lcaf_addr_new_type(uint8_t type)
         case LCAF_GEO:
         	OOR_LOG(LDBG_2, "lcaf_type: GEO");
             break;
+        case LCAF_FTPL:
+        	lcaf->addr = ftpl_type_new();
+        	break;
         default:
         	OOR_LOG(LDBG_2, "lcaf_type: MBUH");
             break;
@@ -257,6 +260,7 @@ lcaf_addr_is_mc(lcaf_addr_t *lcaf)
     else
         return(FALSE);
 }
+
 
 inline int
 lcaf_addr_is_iid(lcaf_addr_t *lcaf)

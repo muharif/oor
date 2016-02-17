@@ -100,6 +100,21 @@ typedef struct _rle_t {
     glist_t     *nodes;
 } rle_t;
 
+/*5 Tuple*/
+
+typedef struct {
+	uint16_t	src_lp;
+	uint16_t	src_up;
+	uint16_t	dst_lp;
+	uint16_t	dst_up;
+	uint16_t	reserved;
+	uint32_t	protocol;
+    uint16_t	src_mlen;
+    uint16_t	dst_mlen;
+    lisp_addr_t	*src_pref;
+    lisp_addr_t	*dst_pref;
+} ftpl_t;
+
 
 lcaf_addr_t             *lcaf_addr_new();
 lcaf_addr_t             *lcaf_addr_new_type(uint8_t type);
