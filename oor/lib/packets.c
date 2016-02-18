@@ -244,8 +244,6 @@ pkt_parse_5_tuple(lbuf_t *b, packet_tuple_t *tuple)
         return (BAD);
     }
 
-    OOR_LOG(LDBG_2, "pkt_parse_5_tuple: %",tuple->protocol);
-
     if (tuple->protocol == IPPROTO_UDP) {
         udp = lbuf_data(&packet);
         tuple->src_port = ntohs(udp->source);
@@ -256,6 +254,7 @@ pkt_parse_5_tuple(lbuf_t *b, packet_tuple_t *tuple)
         tuple->dst_port = ntohs(tcp->dest);
     } else {
         /* If protocol is not TCP or UDP, ports of the tuple set to 0 */
+    	OOR_LOG(LDBG_2, "pkt_parse_5_tuple: Not et!");
         tuple->src_port = 0;
         tuple->dst_port = 0;
     }
