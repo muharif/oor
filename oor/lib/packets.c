@@ -221,8 +221,6 @@ pkt_parse_5_tuple(lbuf_t *b, packet_tuple_t *tuple)
 
     iph = lbuf_ip(&packet);
 
-    OOR_LOG(LDBG_2, "pkt_parse_5_tuple: %",&iph->saddr);
-
     lisp_addr_set_lafi(&tuple->src_addr, LM_AFI_IP);
     lisp_addr_set_lafi(&tuple->dst_addr, LM_AFI_IP);
 
@@ -245,6 +243,8 @@ pkt_parse_5_tuple(lbuf_t *b, packet_tuple_t *tuple)
         OOR_LOG(LDBG_2, "pkt_parse_5_tuple: Not an IP packet!");
         return (BAD);
     }
+
+    OOR_LOG(LDBG_2, "pkt_parse_5_tuple: %",tuple->protocol);
 
     if (tuple->protocol == IPPROTO_UDP) {
         udp = lbuf_data(&packet);
