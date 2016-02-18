@@ -140,7 +140,8 @@ lcaf_addr_new_type(uint8_t type)
         	OOR_LOG(LDBG_2, "lcaf_type: GEO");
             break;
         case LCAF_FTPL:
-        	lcaf->addr = ftpl_type_new();
+        //	lcaf->addr = ftpl_type_new();
+        	OOR_LOG(LDBG_2, "lcaf_type: FTPL");
         	break;
         default:
         	OOR_LOG(LDBG_2, "lcaf_type: MBUH");
