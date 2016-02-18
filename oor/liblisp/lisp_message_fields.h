@@ -56,7 +56,8 @@ typedef enum {
     LCAF_TUPLE,
     LCAF_RLE,
     LCAF_DATA_MODEL,
-    LCAF_KEY_VALUE
+    LCAF_KEY_VALUE,
+	LCAF_FTPL
 } lcaf_type_e;
 
 /*
