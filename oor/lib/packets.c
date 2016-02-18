@@ -221,6 +221,8 @@ pkt_parse_5_tuple(lbuf_t *b, packet_tuple_t *tuple)
 
     iph = lbuf_ip(&packet);
 
+    OOR_LOG(LDBG_2, "pkt_parse_5_tuple: %",iph);
+
     lisp_addr_set_lafi(&tuple->src_addr, LM_AFI_IP);
     lisp_addr_set_lafi(&tuple->dst_addr, LM_AFI_IP);
 
