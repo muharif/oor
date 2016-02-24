@@ -84,8 +84,6 @@ lcaf_addr_is_ftpl(lcaf_addr_t *lcaf)
 inline ftpl_t                *ftpl_type_new();
 ftpl_t *                     ftpl_type_new_init(int ftpl, lisp_addr_t *addr, uint8_t mlen);
 inline void                 ftpl_type_del(void *ftpl);
-inline uint8_t              ftpl_type_get_mlen(ftpl_t *ftpl);
-inline uint32_t             lcaf_ftpl_get_ftpl(lcaf_addr_t *ftpl);
 inline uint32_t             ftpl_type_get_ftpl(ftpl_t *ftpl);
 inline lisp_addr_t          *ftpl_type_get_addr(void *ftpl);
 inline void                 ftpl_type_set_ftpl(ftpl_t *addr, uint32_t ftpl);
@@ -146,67 +144,21 @@ ftpl_type_new()
 }
 
 ftpl_t *
-ftpl_type_new_init(lbuf_t *b,  lisp_5tuple_t *ltuple, lisp_addr_t *addr,)
+ftpl_type_new_init()
 {
-    ftpl_t *ftplt = ftpl_type_new();
-    struct iphdr *iph = NULL;
-    struct ip6_hdr *ip6h = NULL;
-    struct udphdr *udp = NULL;
-    struct tcphdr *tcp = NULL;
-    lbuf_t packet = *b;
-
-    iph = lbuf_ip(&packet);
-
-    lisp_addr_set_lafi(&tuple->src_addr, LM_AFI_IP);
-    lisp_addr_set_lafi(&tuple->dst_addr, LM_AFI_IP);
-
-
-    switch (iph->version) {
-        case 4:
-            lisp_addr_ip_init(&ltuple->src_addr, &iph->saddr, AF_INET);
-            lisp_addr_ip_init(&ltuple->dst_addr, &iph->daddr, AF_INET);
-            ltuple->protocol = iph->protocol;
-            lbuf_pull(&packet, iph->ihl * 4);
-            break;
-        case 6:
-            ip6h = (struct ip6_hdr *)iph;
-            lisp_addr_ip_init(&ltuple->src_addr, &ip6h->ip6_src, AF_INET6);
-            lisp_addr_ip_init(&ltuple->dst_addr, &ip6h->ip6_dst, AF_INET6);
-            /* XXX: assuming no extra headers */
-            ltuple->protocol = ip6h->ip6_nxt;
-            lbuf_pull(&packet, sizeof(struct ip6_hdr));
-            break;
-        default:
-            OOR_LOG(LDBG_2, "pkt_parse_5_tuple: Not an IP packet!");
-            return (BAD);
-        }
-
-    if (ltuple->protocol == IPPROTO_UDP) {
-        udp = lbuf_data(&packet);
-        ltuple->src_port = ntohs(udp->source);
-        ltuple->dst_port = ntohs(udp->dest);
-    } else if (ltuple->protocol == IPPROTO_TCP) {
-        tcp = lbuf_data(&packet);
-        ltuple->src_port = ntohs(tcp->source);
-        ltuple->dst_port = ntohs(tcp->dest);
-    } else {
-        /* If protocol is not TCP or UDP, ports of the tuple set to 0 */
-        ltuple->src_port = 0;
-        ltuple->dst_port = 0;
-    }
-
-    ftplt->protocol	= ltuple->protocol;
-    ftplt->src_lp	= ltuple->src_port;
-	ftplt->src_up	= ltuple->src_port;
-	ftplt->dst_lp	= ltuple->dst_port;
-	ftplt->dst_up 	= ltuple->dst_port;
-
-    ftplt->src_mlen = mlen();
-    ftplt->dst_mlen = mlen();
-    ftplt->src_pref = pref_get_network_address(ltuple->src_addr);
-    ftplt->dst_pref = pref_get_network_address(ltuple->dst_addr);
+    ftpl_t *ftplt = iid_type_new();
+    ftplt->src_lp	= 0;
+	ftplt->src_up	= 0;
+	ftplt->dst_lp	= 0;
+	ftplt->dst_up 	= 0;
+	ftplt->protocol	= 0;
+    ftplt->src_mlen = 0;
+    ftplt->dst_mlen = 0;
+    ftplt->src_pref = 0;
+    ftplt->dst_pref = 0;
     return(iidt);
 }
+
 
 inline int
 ftpl_type_write_to_pkt(uint8_t *offset, void *ftpl)
