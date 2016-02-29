@@ -243,7 +243,7 @@ pkt_parse_5_tuple(lbuf_t *b, packet_tuple_t *tuple)
         OOR_LOG(LDBG_2, "pkt_parse_5_tuple: Not an IP packet!");
         return (BAD);
     }
-    OOR_LOG(LDBG_2, "pkt_parse_5_tuple: %d", tuple->protocol);
+    OOR_LOG(LDBG_2, "pkt_parse_5_tuple: %s", tuple->protocol);
 
     if (tuple->protocol == IPPROTO_UDP) {
         udp = lbuf_data(&packet);
