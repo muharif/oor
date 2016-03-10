@@ -29,10 +29,17 @@
 #include "int_table.h"
 #include "../elibs/patricia/patricia.h"
 #include "../liblisp/lisp_address.h"
-
+#include "../elibs/khash/khash.h"
 
 #define NOT_EXACT 0
 #define EXACT 1
+
+KHASH_INIT(5tuple, lisp_addr_t *, mdb_t *, 1, lcaf_tuple_hash, lcaf_tuple_cmp)
+
+typedef struct 5tuple {
+    khash_t(5tuple) *htable;
+    struct ovs_list head_list; /* To order flows */
+} 5tuple_t;
 
 /*
  *  Patricia tree based databases
@@ -45,6 +52,7 @@ typedef struct {
     int_htable *AF6_iid_db;
     patricia_tree_t *AF4_mc_db;
     patricia_tree_t *AF6_mc_db;
+    5tuple_t *tpl;
     int n_entries;
 } mdb_t;
 
@@ -238,3 +246,4 @@ patricia_tree_t *_get_local_db_for_addr(mdb_t *db, lisp_addr_t *addr);
 
 
 #endif /* MAPPING_DB_H_ */
+

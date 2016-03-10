@@ -78,7 +78,7 @@ _find_lcaf_node(mdb_t *db, lcaf_addr_t *lcaf, uint8_t exact)
 void
 _add_ftpl_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
 {
-	5tuple_t *ftpl;
+	ftpl = db->tpl;
 	khiter_t k;
 /*	packet_tuple_t *tpl;
 
@@ -89,13 +89,13 @@ _add_ftpl_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
 	tpl->protocol=lcaf_ftpl_get_proto(lcaf);*/
 
     k = kh_put(5tuple, ftpl->htable, lcaf, &ret);
-    kh_val(ftpl->htable, k) = db->tpl;
+    kh_val(ftpl->htable, k) = entry;
 }
 
 void
 _rm_ftpl_entry((mdb_t *db, lcaf_addr_t *lcaf)
 {
-	5tuple_t *ftpl;
+	ftpl = db->tpl;
 	khiter_t k;
 	/*packet_tuple_t *tpl;
 
