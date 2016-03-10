@@ -978,7 +978,7 @@ _rm_ftpl_entry_khiter(ttable_t *tt, khiter_t k)
     kh_del(ttable,tt->htable,k);
 }*/
 
-fwd_info_t *
+void
 mdb_ftpl_lookup(mdb_t *db, lcaf_addr_t *lcaf)
 {
     khiter_t k;
