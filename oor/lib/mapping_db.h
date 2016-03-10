@@ -34,10 +34,10 @@
 #define NOT_EXACT 0
 #define EXACT 1
 
-typedef struct 5tuple {
+typedef struct ftuple {
     khash_t(5tuple) *htable;
     struct ovs_list head_list; /* To order flows */
-} 5tuple_t;
+} ftuple_t;
 
 /*
  *  Patricia tree based databases
@@ -50,7 +50,7 @@ typedef struct {
     int_htable *AF6_iid_db;
     patricia_tree_t *AF4_mc_db;
     patricia_tree_t *AF6_mc_db;
-    5tuple_t *tpl;
+    ftuple_t *tpl;
     int n_entries;
 } mdb_t;
 
