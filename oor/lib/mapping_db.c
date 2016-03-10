@@ -978,17 +978,18 @@ _rm_ftpl_entry_khiter(ttable_t *tt, khiter_t k)
     kh_del(ttable,tt->htable,k);
 }*/
 
-void
+/*void
 mdb_ftpl_lookup(mdb_t *db, lcaf_addr_t *lcaf)
 {
-    khiter_t k;
+
+	khiter_t k;
     double elapsed;
 
     k = kh_get(5tuple,ftpl->htable, lcaf);
-    if (k == kh_end(tt->htable)){
+    if (k == kh_end(db->htable)){
         return (NULL);
     }
     return(kh_value(tt->htable,k));
-}
+}*/
 
 
