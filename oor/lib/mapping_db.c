@@ -954,7 +954,7 @@ _add_ftpl_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
 }
 
 void
-_rm_ftpl_entry((mdb_t *db, lcaf_addr_t *lcaf)
+_rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
 {
 	ftpl = db->tpl;
 	khiter_t k;
