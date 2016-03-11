@@ -40,6 +40,12 @@
  *  Patricia tree based databases
  *  for IP/IP-prefix and multicast addresses
  */
+
+typedef struct ftuple {
+    khash_t(5tuple) *htable;
+    struct ovs_list head_list; /* To order flows */
+} ftuple_t;
+
 typedef struct {
     patricia_tree_t *AF4_ip_db;
     patricia_tree_t *AF6_ip_db;
@@ -51,12 +57,9 @@ typedef struct {
     int n_entries;
 } mdb_t;
 
-typedef struct ftuple {
-    khash_t(5tuple) *htable;
-    struct ovs_list head_list; /* To order flows */
-} ftuple_t;
 
-KHASH_INIT(5tuple, lisp_addr_t *, mdb_t *, 1, lcaf_tuple_hash, lcaf_tuple_cmp);
+
+//KHASH_INIT(5tuple, lisp_addr_t *, mdb_t *, 1, lcaf_tuple_hash, lcaf_tuple_cmp);
 
 
 

@@ -386,6 +386,28 @@ _rm_mc_entry(mdb_t *db, lcaf_addr_t *mcaddr)
     return (pt_remove_mc_addr(pt, mcaddr));
 }
 
+void
+_add_ftpl_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
+{
+	ftpl = db->tpl;
+	khiter_t k;
+
+    k = kh_put(5tuple, ftpl->htable, lcaf, &ret);
+    kh_val(ftpl->htable, k) = entry;
+}
+
+void
+_rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
+{
+	ftpl = db->tpl;
+	khiter_t k;
+
+    k = kh_get(5tuple,ftpl->htable, lcaf);
+    if (k == kh_end(ftpl->htable)){
+        return;
+    }
+    kh_del(5tuple,ftpl->htable,k);
+}
 
 static int
 _add_lcaf_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
@@ -943,28 +965,7 @@ void mdb_for_each_entry_cb(mdb_t *mdb, void (*callback)(void *, void *), void *c
 
 }
 
-void
-_add_ftpl_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
-{
-	ftpl = db->tpl;
-	khiter_t k;
 
-    k = kh_put(5tuple, ftpl->htable, lcaf, &ret);
-    kh_val(ftpl->htable, k) = entry;
-}
-
-void
-_rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
-{
-	ftpl = db->tpl;
-	khiter_t k;
-
-    k = kh_get(5tuple,ftpl->htable, lcaf);
-    if (k == kh_end(ftpl->htable)){
-        return;
-    }
-    kh_del(5tuple,ftpl->htable,k);
-}
 
 /*static void
 _rm_ftpl_entry_khiter(ttable_t *tt, khiter_t k)
