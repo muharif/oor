@@ -386,7 +386,7 @@ _rm_mc_entry(mdb_t *db, lcaf_addr_t *mcaddr)
     return (pt_remove_mc_addr(pt, mcaddr));
 }
 
-static int *
+static void *
 _add_ftpl_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
 {
 	ftuple_t *ftpl;
@@ -407,7 +407,7 @@ _rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
 
     k = kh_get(5tuple,ftpl->htable, lcaf);
     if (k == kh_end(ftpl->htable)){
-        return;
+        return(GOOD);
     }
     return(kh_del(5tuple,ftpl->htable,k));
 }
