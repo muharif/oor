@@ -386,21 +386,22 @@ _rm_mc_entry(mdb_t *db, lcaf_addr_t *mcaddr)
     return (pt_remove_mc_addr(pt, mcaddr));
 }
 
-void
+static int *
 _add_ftpl_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
 {
-	ftuple *ftpl;
+	ftuple_t *ftpl;
 	ftpl = db->tpl;
 	khiter_t k;
 
     k = kh_put(5tuple, ftpl->htable, lcaf, &ret);
     kh_val(ftpl->htable, k) = entry;
+    return(GOOD);
 }
 
-void
+static void *
 _rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
 {
-	ftuple *ftpl;
+	ftuple_t *ftpl;
 	ftpl = db->tpl;
 	khiter_t k;
 
@@ -408,7 +409,7 @@ _rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
     if (k == kh_end(ftpl->htable)){
         return;
     }
-    kh_del(5tuple,ftpl->htable,k);
+    return(kh_del(5tuple,ftpl->htable,k));
 }
 
 static int
