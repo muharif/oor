@@ -41,6 +41,9 @@
  *  for IP/IP-prefix and multicast addresses
  */
 
+KHASH_INIT(5tuple, lisp_addr_t *, mcache_entry_t *, 1, lcaf_tuple_hash, lcaf_tuple_cmp);
+
+
 typedef struct ftuple {
     khash_t(5tuple) *htable;
     struct ovs_list head_list; /* To order flows */
@@ -56,11 +59,6 @@ typedef struct {
     ftuple_t *tpl;
     int n_entries;
 } mdb_t;
-
-
-
-//KHASH_INIT(5tuple, lisp_addr_t *, mdb_t *, 1, lcaf_tuple_hash, lcaf_tuple_cmp);
-
 
 
 typedef void (*mdb_del_fct)(void *);
