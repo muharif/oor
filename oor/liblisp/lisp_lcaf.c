@@ -730,6 +730,42 @@ mc_type_get_ip_pref_addr (void *mc)
 }
 
 /*
+ * ftp_t functions
+ */
+
+inline lisp_addr_t *
+lcaf_ftpl_get_srcpref(lcaf_addr_t *ftpl)
+{
+    assert(ftpl);
+    if (lcaf_addr_get_type(ftpl) != LCAF_FTPL)
+        return(NULL);
+    return(ftpl_type_get_srcpref(lcaf_addr_get_ftpl(ftpl)));
+}
+
+inline lisp_addr_t *
+lcaf_ftpl_get_dstpref(lcaf_addr_t *ftpl)
+{
+    assert(ftpl);
+    if (lcaf_addr_get_type(ftpl) != LCAF_FTPL)
+        return(NULL);
+    return(ftpl_type_get_dstpref(lcaf_addr_get_ftpl(ftpl)));
+}
+
+inline uint16_t
+lcaf_ftpl_get_srclp(lcaf_addr_t *ftpl)
+{
+    assert(ftpl);
+    return(ftpl_type_get_srclp(lcaf_addr_get_ftpl(ftpl)));
+}
+
+inline uint16_t
+lcaf_ftpl_get_srcup(lcaf_addr_t *ftpl)
+{
+    assert(ftpl);
+    return(ftpl_type_get_srcup(lcaf_addr_get_ftpl(ftpl)));
+}
+
+/*
  * iid_addr_t functions
  */
 inline iid_t *
