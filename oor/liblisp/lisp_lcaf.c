@@ -232,6 +232,13 @@ lcaf_addr_get_mc(lcaf_addr_t *lcaf)
     return((mc_t *)lcaf_addr_get_addr(lcaf));
 }
 
+inline ftpl_t *
+lcaf_addr_get_ftpl(lcaf_addr_t *lcaf)
+{
+    assert(lcaf);
+    return((ftpl_t *)lcaf_addr_get_addr(lcaf));
+}
+
 inline geo_t *
 lcaf_addr_get_geo(lcaf_addr_t *lcaf)
 {

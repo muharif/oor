@@ -123,6 +123,8 @@ void                    lcaf_addr_del_addr(lcaf_addr_t *lcaf);
 inline lcaf_type_e        lcaf_addr_get_type(lcaf_addr_t *lcaf);
 inline void             *lcaf_addr_get_addr(lcaf_addr_t *lcaf);
 inline mc_t             *lcaf_addr_get_mc(lcaf_addr_t *lcaf);
+
+inline ftpl_t *			lcaf_addr_get_ftpl(lcaf_addr_t *lcaf);
 inline geo_t            *lcaf_addr_get_geo(lcaf_addr_t *lcaf);
 inline iid_t            *lcaf_addr_get_iid(lcaf_addr_t *lcaf);
 
