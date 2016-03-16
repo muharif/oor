@@ -938,7 +938,7 @@ inline lisp_addr_t *
 lcaf_ftpl_get_srcpref(lcaf_addr_t *ftpl)
 {
     assert(ftpl);
-    if (lcaf_addr_get_type(mc) != LCAF_FTPL)
+    if (lcaf_addr_get_type(ftpl) != LCAF_FTPL)
         return(NULL);
     return(ftpl_type_get_srcpref(lcaf_addr_get_ftpl(ftpl)));
 }
@@ -947,7 +947,7 @@ inline lisp_addr_t *
 lcaf_ftpl_get_dstpref(lcaf_addr_t *ftpl)
 {
     assert(ftpl);
-    if (lcaf_addr_get_type(mc) != LCAF_FTPL)
+    if (lcaf_addr_get_type(ftpl) != LCAF_FTPL)
         return(NULL);
     return(ftpl_type_get_dstpref(lcaf_addr_get_ftpl(ftpl)));
 }
