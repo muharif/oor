@@ -123,7 +123,6 @@ void                    lcaf_addr_del_addr(lcaf_addr_t *lcaf);
 inline lcaf_type_e        lcaf_addr_get_type(lcaf_addr_t *lcaf);
 inline void             *lcaf_addr_get_addr(lcaf_addr_t *lcaf);
 inline mc_t             *lcaf_addr_get_mc(lcaf_addr_t *lcaf);
-inline ftpl_t 			*lcaf_addr_get_ftpl(lcaf_addr_t *lcaf)
 inline geo_t            *lcaf_addr_get_geo(lcaf_addr_t *lcaf);
 inline iid_t            *lcaf_addr_get_iid(lcaf_addr_t *lcaf);
 
@@ -213,9 +212,6 @@ lisp_addr_t *               iid_type_get_ip_pref_addr(void *iid);
 void                        lcaf_iid_init(lcaf_addr_t *iidaddr, int iid, lisp_addr_t *addr, uint8_t mlen);
 inline int                  lisp_addr_is_iid(lisp_addr_t *addr);
 lisp_addr_t *               lisp_addr_new_init_iid(int iid, lisp_addr_t *addr, uint8_t mlen);
-
-
-
 
 
 
