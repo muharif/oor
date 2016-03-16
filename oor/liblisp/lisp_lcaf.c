@@ -988,14 +988,14 @@ lcaf_ftpl_get_proto(lcaf_addr_t *ftpl)
     return(ftpl_type_get_proto(lcaf_addr_get_ftpl(ftpl)));
 }
 
-inline uint8_t
+inline uint16_t
 lcaf_ftpl_get_src_mlen(lcaf_addr_t *ftpl)
 {
     assert(ftpl);
     return(ftpl_type_get_src_mlen(ftpl->addr));
 }
 
-inline uint8_t
+inline uint16_t
 lcaf_ftpl_get_dst_mlen(lcaf_addr_t *ftpl)
 {
     assert(ftpl);
@@ -1114,7 +1114,7 @@ mc_type_cmp(void *mc1, void *mc2)
             (mc_type_get_grp_plen(mc1) != mc_type_get_grp_plen(mc2)))
         return(-1);
 
-    /* XXX: rushed implementation
+    * : rushed implementation
      * (S, G) comparison
      * First compare S and then G*/
 /*    int res = lisp_addr_cmp(mc_type_get_src(mc1), mc_type_get_src(mc2));
@@ -1160,19 +1160,19 @@ ftpl_type_init(lisp_addr_t *src_pref, lisp_addr_t *dst_pref, uint16_t port, uint
     lisp_addr_copy(ftpl_type_get_dstpref(ftpl), grp_pref);
     ftpl_type_set_port(ftpl, port);
     ftpl_type_set_proto(ftpl, proto);
-    ftpl_type_set_mlen(ftpl, mlen)
+    ftpl_type_set_mlen(ftpl, mlen);
     return(ftpl);
 }
 
-inline lisp_addr_t *
-ftpl_type_get_srcpref(ftpl_t *ftpl)
+inline lisp_addr_t
+*ftpl_type_get_srcpref(ftpl_t *ftpl)
 {
     assert(ftpl);
     return(ftpl->src_pref);
 }
 
-inline lisp_addr_t *
-ftpl_type_get_dstpref(ftpl_t *ftpl)
+inline lisp_addr_t
+*ftpl_type_get_dstpref(ftpl_t *ftpl)
 {
     assert(ftpl);
     return(ftpl->dst_pref);
