@@ -894,7 +894,7 @@ ftpl_type_init(lisp_addr_t *src_pref, lisp_addr_t *dst_pref, uint16_t port, uint
 
     ftpl = ftpl_type_new();
     lisp_addr_copy(ftpl_type_get_srcpref(ftpl), src_pref);
-    lisp_addr_copy(ftpl_type_get_dstpref(ftpl), grp_pref);
+    lisp_addr_copy(ftpl_type_get_dstpref(ftpl), dst_pref);
     ftpl_type_set_port(ftpl, port);
     ftpl_type_set_proto(ftpl, proto);
     ftpl_type_set_mlen(ftpl, mlen);
@@ -983,7 +983,7 @@ ftpl_type_to_char(void *ftpl)
     return(buf[i]);
 }
 
-int
+/*int
 ftpl_type_get_size_to_write(void *ftpl)
 {
     return( sizeof(lcaf_hdr_t)+
@@ -996,7 +996,7 @@ ftpl_type_get_size_to_write(void *ftpl)
 			lisp_addr_size_to_write(ftpl_type_get_dstlp(ftpl)) +
 			lisp_addr_size_to_write(ftpl_type_get_src_mlen(ftpl)) +
 			lisp_addr_size_to_write(ftpl_type_get_dst_mlen(ftpl)));
-}
+}*/
 
 /*
  * iid_addr_t functions
