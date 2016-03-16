@@ -491,6 +491,43 @@ uint16_t auth_data_get_len_for_type(lisp_key_type_e key_id);
 #define AUTH_REC_DATA_LEN(h_) AUTH_REC_CAST((h_))->auth_data_len
 #define AUTH_REC_DATA(h_) ((uint8_t *)(h_))+sizeof(auth_record_hdr_t)
 
+/*
+ * 5 Tuple (muarif)
+ * put this in lisp_message_fields.h
+ */
+
+/*
+ *      0                   1                   2                   3
+ *    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+ *   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ *   |           AFI = 16387         |     Rsvd1     |     Flags     |
+ *   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ *   |   Type = 16    |     Rsvd2     |             4 + n            |
+ *   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ *   |         Lower Src-port        |         Upper Src-port        |
+ *   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ *   |         Lower Dst-port        |         Upper Dst-port        |
+ *   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ *   |    Reserved   |   Protocol    |   Source-ML   |    Dest-ML    |
+ *   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ *   |              AFI = x          |         Source-Prefix ...     |
+ *   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ *   |              AFI = x          |     Destination-Prefix ...    |
+ *   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ *
+ */
+
+typedef struct _lcaf_ftpl_hdr_t{
+    uint16_t    afi;
+    uint8_t     rsvd1;
+    uint8_t     flags;
+    uint8_t     type;
+    uint8_t     rsvd2;
+    uint16_t    len;
+} __attribute__ ((__packed__)) lcaf_ftpl_hdr_t;
+
+
+
 
 
 
