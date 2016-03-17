@@ -43,7 +43,7 @@ del_fct del_fcts[MAX_LCAFS] = {
         0, 0, 0,
         geo_type_del, 0, 0,
         mc_type_del, elp_type_del, 0, 0,
-        rle_type_del, 0, 0};
+        rle_type_del, 0, 0, ftpl_type_del};
 
 parse_fct parse_fcts[MAX_LCAFS] = {
         0, afi_list_type_parse,
@@ -57,14 +57,14 @@ to_char_fct to_char_fcts[MAX_LCAFS] = {
         iid_type_to_char, 0, 0, 0,
         geo_type_to_char, 0, 0,
         mc_type_to_char, elp_type_to_char, 0, 0,
-        rle_type_to_char, 0, 0 };
+        rle_type_to_char, 0, 0, ftpl_type_to_char  };
 
 write_fct write_fcts[MAX_LCAFS] = {
         0, afi_list_type_write_to_pkt,
         iid_type_write_to_pkt, 0, 0, 0,
         0, 0, 0,
         mc_type_write_to_pkt, elp_type_write_to_pkt, 0, 0,
-        rle_type_write_to_pkt, 0, 0};
+        rle_type_write_to_pkt, 0, 0, ftpl_type_write_to_pkt};
 
 copy_fct copy_fcts[MAX_LCAFS] = {
         0, afi_list_type_copy,
@@ -85,7 +85,7 @@ size_in_pkt_fct size_in_pkt_fcts[MAX_LCAFS] = {
         iid_type_get_size_to_write, 0, 0, 0,
         0, 0, 0,
         mc_type_get_size_to_write, elp_type_get_size_to_write, 0, 0,
-        rle_type_get_size_to_write, 0, 0};
+        rle_type_get_size_to_write, 0, 0, ftpl_type_get_size_to_write};
 
 get_ip_addr_fct get_ip_addr_fcts[MAX_LCAFS] = {
         0, afi_list_type_get_ip_addr,
@@ -801,8 +801,6 @@ lcaf_ftpl_get_dst_mlen(lcaf_addr_t *ftpl)
     return(ftpl_type_get_dst_mlen(ftpl->addr));
 }
 
-/* these shouldn't be called from outside */
-
 inline ftpl_t *
 ftpl_type_new()
 {
@@ -874,15 +872,6 @@ ftpl_type_set(ftpl_t *dst, lisp_addr_t *src_pref, lisp_addr_t *dst_pref, uint16_
     ftpl_type_set_proto(dst, proto);
     ftpl_type_set_mlen(dst, mlen);
 }
-
-/**
- * mc_addr_init - makes an mc_addr_t from the parameters passed
- * @ src: source ip
- * @ grp: group ip
- * @ splen: source prefix length
- * @ gplen: group prefix length
- * @ iid: iid of the address
- */
 
 ftpl_t *
 ftpl_type_init(lisp_addr_t *src_pref, lisp_addr_t *dst_pref, uint16_t port, uint32_t proto, uint16_t mlen)
@@ -964,8 +953,6 @@ ftpl_type_get_dst_mlen(ftpl_t *ftpl)
     return(ftpl->dst_mlen);
 }
 
-/* set functions common to all types */
-
 char *
 ftpl_type_to_char(void *ftpl)
 {
@@ -983,20 +970,40 @@ ftpl_type_to_char(void *ftpl)
     return(buf[i]);
 }
 
-/*int
+int
 ftpl_type_get_size_to_write(void *ftpl)
 {
-    return( sizeof(lcaf_hdr_t)+
-            lisp_addr_size_to_write(ftpl_type_get_srcpref(ftpl)) +
-            lisp_addr_size_to_write(ftpl_type_get_dstpref(ftpl)) +
-			lisp_addr_size_to_write(ftpl_type_get_proto(ftpl)) +
-			lisp_addr_size_to_write(ftpl_type_get_srclp(ftpl)) +
-			lisp_addr_size_to_write(ftpl_type_get_srcup(ftpl)) +
-			lisp_addr_size_to_write(ftpl_type_get_dstup(ftpl)) +
-			lisp_addr_size_to_write(ftpl_type_get_dstlp(ftpl)) +
-			lisp_addr_size_to_write(ftpl_type_get_src_mlen(ftpl)) +
-			lisp_addr_size_to_write(ftpl_type_get_dst_mlen(ftpl)));
-}*/
+    return( sizeof(lcaf_ftpl_hdr_t));
+}
+
+inline int
+ftpl_type_write_to_pkt(uint8_t *offset, void *ftpl)
+{
+    int     lena1 = 0, lena2 = 0;
+    uint8_t *cur_ptr = NULL;
+    ((lcaf_ftpl_hdr_t *)offset)->afi = htons(LISP_AFI_LCAF);
+    ((lcaf_ftpl_hdr_t *)offset)->rsvd1 = 0;
+    ((lcaf_ftpl_hdr_t *)offset)->flags = 0;
+    ((lcaf_ftpl_hdr_t *)offset)->type = LCAF_FTPL;
+    ((lcaf_ftpl_hdr_t *)offset)->rsvd2 = 0;
+    ((lcaf_ftpl_hdr_t *)offset)->reserved = 0;
+    ((lcaf_ftpl_hdr_t *)offset)->src_lp=ftpl_type_get_srclp(ftpl);
+    ((lcaf_ftpl_hdr_t *)offset)->src_up=ftpl_type_get_srcup(ftpl);
+    ((lcaf_ftpl_hdr_t *)offset)->dst_lp=ftpl_type_get_dstlp(ftpl);
+    ((lcaf_ftpl_hdr_t *)offset)->dst_up=ftpl_type_get_dstup(ftpl);
+    ((lcaf_ftpl_hdr_t *)offset)->protocol=ftpl_type_get_proto(ftpl);
+    ((lcaf_ftpl_hdr_t *)offset)->src_mlen=ftpl_type_get_src_mlen(ftpl);
+    ((lcaf_ftpl_hdr_t *)offset)->dst_mlen=ftpl_type_get_dst_mlen(ftpl);
+    ((lcaf_ftpl_hdr_t *)offset)->src_pref=ftpl_type_get_dst_srcpref(ftpl);
+    ((lcaf_ftpl_hdr_t *)offset)->dst_pref=ftpl_type_get_dst_dstpref(ftpl);
+    cur_ptr = CO(offset, sizeof(lcaf_ftpl_hdr_t));
+    cur_ptr = CO(cur_ptr, (lena1 = lisp_addr_write(cur_ptr, ftpl_type_get_srcpref(ftpl))));
+    lena2 = lisp_addr_write(cur_ptr, ftpl_type_get_dstpref(ftpl));
+    ((lcaf_ftpl_hdr_t *)offset)->len = htons(lena1+lena2+8*sizeof(uint8_t));
+    return(sizeof(lcaf_ftpl_hdr_t)+lena1+lena2);
+}
+
+
 
 /*
  * iid_addr_t functions
