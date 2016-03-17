@@ -44,12 +44,7 @@
 
 typedef struct fwd_info_ fwd_info_t;
 
-KHASH_INIT(ftpl, lisp_addr_t *, mcache_entry_t *, 1, lcaf_tuple_hash, lcaf_tuple_cmp)
-
-typedef struct ftuple {
-    khash_t(ftpl) *htable;
-    struct ovs_list head_list; /* To order flows */
-} ftuple_t;
+KHASH_INIT(ftpl, lisp_addr_t *, mcache_entry_t *, 1, lcaf_tuple_hash, lcaf_tuple_cmp);
 
 
 typedef struct {
@@ -59,7 +54,7 @@ typedef struct {
     int_htable *AF6_iid_db;
     patricia_tree_t *AF4_mc_db;
     patricia_tree_t *AF6_mc_db;
-    ftuple_t	*tpl;
+    khash_t(ftpl) *htable;
     int n_entries;
 } mdb_t;
 
