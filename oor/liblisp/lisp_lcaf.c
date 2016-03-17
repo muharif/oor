@@ -994,8 +994,6 @@ ftpl_type_write_to_pkt(uint8_t *offset, void *ftpl)
     ((lcaf_ftpl_hdr_t *)offset)->protocol=ftpl_type_get_proto(ftpl);
     ((lcaf_ftpl_hdr_t *)offset)->src_mlen=ftpl_type_get_src_mlen(ftpl);
     ((lcaf_ftpl_hdr_t *)offset)->dst_mlen=ftpl_type_get_dst_mlen(ftpl);
-    ((lcaf_ftpl_hdr_t *)offset)->src_pref=ftpl_type_get_srcpref(ftpl);
-    ((lcaf_ftpl_hdr_t *)offset)->dst_pref=ftpl_type_get_dstpref(ftpl);
     cur_ptr = CO(offset, sizeof(lcaf_ftpl_hdr_t));
     cur_ptr = CO(cur_ptr, (lena1 = lisp_addr_write(cur_ptr, ftpl_type_get_srcpref(ftpl))));
     lena2 = lisp_addr_write(cur_ptr, ftpl_type_get_dstpref(ftpl));
