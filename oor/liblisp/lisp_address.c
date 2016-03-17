@@ -20,6 +20,7 @@
 #include "lisp_address.h"
 #include "../lib/util.h"
 #include "../lib/oor_log.h"
+#include "../elibs/bob/lookup3.c"
 
 
 static inline lm_afi_t get_lafi_(lisp_addr_t *laddr);
@@ -825,7 +826,7 @@ lisp_tuple_hash(lisp_addr_t *lsp)
     uint32_t *tuples = NULL;
 
     port = port + ((int)tuple->dst_port << 16);
-    switch (lisp_addr_ip_afi(&tuple->src_pref)){
+    switch (lisp_addr_ip_afi(&tuple->src_addr)){
     case AF_INET:
         /* 1 integer src_addr
          * + 1 integer dst_adr
@@ -888,5 +889,7 @@ lisp_tuple_cmp(lisp_addr_t *lsp1, lisp_addr_t *lsp2)
            && (lisp_addr_cmp(&t1->src_addr, &t2->src_addr) == 0)
            && (lisp_addr_cmp(&t1->dst_addr, &t2->dst_addr) == 0)
            && t1->iid == t2->iid);
+
+	return 0;
 }
 
