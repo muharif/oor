@@ -53,7 +53,6 @@ static int _add_iid_entry(mdb_t *db, void *entry, lcaf_addr_t *iidaddr);
 static void *_rm_iid_entry(mdb_t *db, lcaf_addr_t *iidaddr);
 static patricia_node_t *_find_iid_node(mdb_t *db, lcaf_addr_t *iidaddr, uint8_t exact);
 
-
 /*
  * Return map cache data base
  */
@@ -394,8 +393,10 @@ static int
 _add_ftpl_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
 {
 	khiter_t k;
+	int ret;
+	ftuple_t *tpl=db->tpl;
 
-    k = kh_put(ftpl, db->tpl->htable, lcaf, &ret);
+    k = kh_put(ftpl, tpl->htable, lcaf, &ret);
     kh_val(db->tpl->htable, k) = entry;
 }
 
@@ -408,7 +409,7 @@ _rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
     if (k == kh_end(db->tpl->htable)){
         return;
     }
-    kh_del(ftpl,db->tpl->htable,k);
+    return(kh_del(ftpl,db->tpl->htable,k));
 }
 
 
