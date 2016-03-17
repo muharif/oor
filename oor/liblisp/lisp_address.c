@@ -812,7 +812,7 @@ uint32_t
 lisp_tuple_hash(lisp_addr_t *lsp)
 {
     lcaf_addr_t *lcaf;
-    packet_tuple_t *tuple
+    packet_tuple_t *tuple;
     int hash = 0;
     int len = 0;
     lcaf = lisp_addr_get_lcaf(lsp);
@@ -868,8 +868,6 @@ lisp_tuple_cmp(lisp_addr_t *lsp1, lisp_addr_t *lsp2)
     lcaf_addr_t *lcaf2;
     packet_tuple_t *t1;
 	packet_tuple_t *t2;
-    int hash = 0;
-    int len = 0;
     lcaf1 = lisp_addr_get_lcaf(lsp1);
     lcaf2 = lisp_addr_get_lcaf(lsp2);
 
