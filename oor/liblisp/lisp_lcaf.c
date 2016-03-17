@@ -78,7 +78,7 @@ cmp_fct cmp_fcts[MAX_LCAFS] = {
         iid_type_cmp, 0, 0, 0,
         0, 0, 0,
         mc_type_cmp, elp_type_cmp, 0, 0,
-        rle_type_cmp, 0, 0, 0, ftpl_type_cmp};
+        rle_type_cmp, 0, 0, ftpl_type_cmp};
 
 size_in_pkt_fct size_in_pkt_fcts[MAX_LCAFS] = {
         0, afi_list_type_get_size_to_write,
@@ -1065,9 +1065,9 @@ ftpl_type_cmp(void *ftpl1, void *ftpl2)
         return(-1);
 
 
-    int res = lisp_addr_cmp(ftpl_type_get_srcpref(ftpl1), mc_type_get_srcpref(ftpl2));
+    int res = lisp_addr_cmp(ftpl_type_get_srcpref(ftpl1), ftpl_type_get_srcpref(ftpl2));
     if (res == 0)
-        return(lisp_addr_cmp(ftpl_type_get_dstpref(ftpl1), mc_type_get_grp(ftpl2)));
+        return(lisp_addr_cmp(ftpl_type_get_dstpref(ftpl1), ftpl_type_get_dstpref(ftpl2)));
     else
         return(res);
 
