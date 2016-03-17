@@ -48,15 +48,6 @@ typedef enum {
 typedef struct _lisp_addr_t lisp_addr_t;
 //typedef struct _lcaf_addr_t lcaf_addr_t;
 
-typedef struct {
-    lisp_addr_t                     src_addr;
-    lisp_addr_t                     dst_addr;
-    uint16_t                        src_port;
-    uint16_t                        dst_port;
-    uint8_t                         protocol;
-    uint32_t                        iid;
-} ftuple_t;
-
 struct _lisp_addr_t {
     struct {
         union {
@@ -68,6 +59,14 @@ struct _lisp_addr_t {
     };
 };
 
+typedef struct {
+    lisp_addr_t                     src_addr;
+    lisp_addr_t                     dst_addr;
+    uint16_t                        src_port;
+    uint16_t                        dst_port;
+    uint8_t                         protocol;
+    uint32_t                        iid;
+} ftuple_t;
 
 
 inline lisp_addr_t *lisp_addr_new();
@@ -166,8 +165,7 @@ int lisp_addr_ip_from_char(char *, lisp_addr_t *);
 int lisp_addr_ippref_from_char(char *, lisp_addr_t *);
 
 inline int lisp_addr_ip_afi_lcaf_type(lisp_addr_t *addr);
-uint32_t	lisp_tuple_hash(lisp_addr_t *lsp);
-int 	lisp_tuple_cmp(lisp_addr_t *lsp1, lisp_addr_t *lsp2);
+
 
 
 #endif /* LISPD_ADDRESS_H_ */

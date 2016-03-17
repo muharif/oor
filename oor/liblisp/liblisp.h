@@ -92,6 +92,8 @@ static inline glist_t *laddr_sorted_list_new();
 static inline void laddr_list_del(glist_t *);
 int laddr_list_get_addr(glist_t *, int, lisp_addr_t *);
 char *laddr_list_to_char(glist_t *l);
+uint32_t	lisp_tuple_hash(lisp_addr_t *lsp);
+int 	lisp_tuple_cmp(lisp_addr_t *lsp1, lisp_addr_t *lsp2);
 
 static inline void
 lisp_msg_destroy(lbuf_t *b)
