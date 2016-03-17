@@ -60,8 +60,8 @@ struct _lisp_addr_t {
 };
 
 typedef struct {
-    lisp_addr_t                     src_addr;
-    lisp_addr_t                     dst_addr;
+    lisp_addr_t                     *src_addr;
+    lisp_addr_t                     *dst_addr;
     uint16_t                        src_port;
     uint16_t                        dst_port;
     uint8_t                         protocol;
