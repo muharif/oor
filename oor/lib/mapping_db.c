@@ -386,6 +386,34 @@ _rm_mc_entry(mdb_t *db, lcaf_addr_t *mcaddr)
     return (pt_remove_mc_addr(pt, mcaddr));
 }
 
+/*
+ * tpl
+ */
+
+static int
+_add_ftpl_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
+{
+	ftpl = db->tpl;
+	khiter_t k;
+
+    k = kh_put(5tuple, ftpl->htable, lcaf, &ret);
+    kh_val(ftpl->htable, k) = entry;
+}
+
+static void *
+_rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
+{
+	ftpl = db->tpl;
+	khiter_t k;
+
+    k = kh_get(5tuple,ftpl->htable, lcaf);
+    if (k == kh_end(ftpl->htable)){
+        return;
+    }
+    kh_del(5tuple,ftpl->htable,k);
+}
+
+
 
 
 static int
@@ -892,46 +920,6 @@ patricia_node_t *pt_find_mc_node(patricia_tree_t *strie, lcaf_addr_t *mcaddr, ui
 
 
     return(gnode);
-}
-
-/*
- * tpl
- */
-
-void
-_add_ftpl_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
-{
-	ftpl = db->tpl;
-	khiter_t k;
-
-    k = kh_put(5tuple, ftpl->htable, lcaf, &ret);
-    kh_val(ftpl->htable, k) = entry;
-}
-
-void
-_rm_ftpl_entry((mdb_t *db, lcaf_addr_t *lcaf)
-{
-	ftpl = db->tpl;
-	khiter_t k;
-
-    k = kh_get(5tuple,ftpl->htable, lcaf);
-    if (k == kh_end(ftpl->htable)){
-        return;
-    }
-    kh_del(5tuple,ftpl->htable,k);
-}
-
-fwd_info_t *
-mdb_ftpl_lookup(mdb_t *db, lcaf_addr_t *lcaf)
-{
-    khiter_t k;
-    double elapsed;
-
-    k = kh_get(5tuple,ftpl->htable, lcaf);
-    if (k == kh_end(tt->htable)){
-        return (NULL);
-    }
-    return(kh_value(tt->htable,k));
 }
 
 
