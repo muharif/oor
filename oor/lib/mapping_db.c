@@ -396,9 +396,8 @@ _add_lcaf_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
         return (_add_iid_entry(db, entry, lcaf));
     case LCAF_MCAST_INFO:
         return (_add_mc_entry(db, entry, lcaf));
- /*   case LCAF_FTPL:
-    	kh_init(5tuple);
-    	return (_add_ftpl_entry(db, entry, lcaf));*/
+    case LCAF_FTPL:
+    	return (_add_ftpl_entry(db, entry, lcaf));
     default:
         OOR_LOG(LDBG_3, "_add_lcaf_entry: LCAF type %d not supported!",
                 lcaf_addr_get_type(lcaf));
@@ -414,8 +413,8 @@ _del_lcaf_entry(mdb_t *db, lcaf_addr_t *lcaf)
         return (_rm_iid_entry(db,lcaf));
     case LCAF_MCAST_INFO:
         return (_rm_mc_entry(db,lcaf));
-/*    case LCAF_FTPL:
-    	return (_rm_ftpl_entry(db, lcaf));*/
+    case LCAF_FTPL:
+    	return (_rm_ftpl_entry(db, lcaf));
     default:
         OOR_LOG(LDBG_3, "_del_lcaf_entry: called with unknown LCAF type:%u",
                 lcaf_addr_get_type(lcaf));
@@ -895,6 +894,46 @@ patricia_node_t *pt_find_mc_node(patricia_tree_t *strie, lcaf_addr_t *mcaddr, ui
     return(gnode);
 }
 
+/*
+ * tpl
+ */
+
+void
+_add_ftpl_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
+{
+	ftpl = db->tpl;
+	khiter_t k;
+
+    k = kh_put(5tuple, ftpl->htable, lcaf, &ret);
+    kh_val(ftpl->htable, k) = entry;
+}
+
+void
+_rm_ftpl_entry((mdb_t *db, lcaf_addr_t *lcaf)
+{
+	ftpl = db->tpl;
+	khiter_t k;
+
+    k = kh_get(5tuple,ftpl->htable, lcaf);
+    if (k == kh_end(ftpl->htable)){
+        return;
+    }
+    kh_del(5tuple,ftpl->htable,k);
+}
+
+fwd_info_t *
+mdb_ftpl_lookup(mdb_t *db, lcaf_addr_t *lcaf)
+{
+    khiter_t k;
+    double elapsed;
+
+    k = kh_get(5tuple,ftpl->htable, lcaf);
+    if (k == kh_end(tt->htable)){
+        return (NULL);
+    }
+    return(kh_value(tt->htable,k));
+}
+
 
 uint8_t pt_test_if_empty(patricia_tree_t *pt) {
     if (pt->num_active_node > 0)
@@ -943,33 +982,5 @@ void mdb_for_each_entry_cb(mdb_t *mdb, void (*callback)(void *, void *), void *c
     } mdb_foreach_mc_entry_end;
 
 }
-
-
-
-/*static void
-_rm_ftpl_entry_khiter(ttable_t *tt, khiter_t k)
-{
-    ttable_node_t *node;
-
-    node = kh_value(tt->htable,k);
-    OOR_LOG(LDBG_3,"ttable_remove_with_khiter: Remove tupla: %s ", pkt_tuple_to_char(node->tpl));
-    list_remove(&node->list_elt);
-    ttable_node_del(node);
-    kh_del(ttable,tt->htable,k);
-}*/
-
-/*void
-mdb_ftpl_lookup(mdb_t *db, lcaf_addr_t *lcaf)
-{
-
-	khiter_t k;
-    double elapsed;
-
-    k = kh_get(5tuple,ftpl->htable, lcaf);
-    if (k == kh_end(db->htable)){
-        return (NULL);
-    }
-    return(kh_value(tt->htable,k));
-}*/
 
 
