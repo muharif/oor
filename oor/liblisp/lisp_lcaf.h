@@ -219,6 +219,7 @@ inline uint16_t			ftpl_type_get_src_mlen(ftpl_t *ftpl);
 inline uint16_t			ftpl_type_get_dst_mlen(ftpl_t *ftpl);
 char 					*ftpl_type_to_char(void *ftpl);
 int						ftpl_type_get_size_to_write(void *ftpl);
+inline int				ftpl_type_write_to_pkt(uint8_t *offset, void *ftpl)
 
 
 
