@@ -812,7 +812,7 @@ lisp_addr_ip_afi_lcaf_type(lisp_addr_t *addr)
 uint32_t
 lisp_tuple_hash(lisp_addr_t *lsp)
 {
-    lisp_addr_t *lcaf;
+    lcaf_addr_t *lcaf;
     packet_tuple_t *tuple;
     int hash = 0;
     int len = 0;
@@ -865,8 +865,8 @@ lisp_tuple_hash(lisp_addr_t *lsp)
 int
 lisp_tuple_cmp(lisp_addr_t *lsp1, lisp_addr_t *lsp2)
 {
-    lisp_addr_t *lcaf1;
-    lisp_addr_t *lcaf2;
+    lcaf_addr_t *lcaf1;
+    lcaf_addr_t *lcaf2;
     packet_tuple_t *t1;
 	packet_tuple_t *t2;
     lcaf1 = lisp_addr_get_lcaf(lsp1);
