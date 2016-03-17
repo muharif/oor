@@ -394,9 +394,8 @@ _add_ftpl_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
 {
 	khiter_t k;
 	int ret;
-	ftuple_t *tpl=db->tpl;
 
-    k = kh_put(ftpl, tpl->htable, lcaf, &ret);
+    k = kh_put(ftpl, db->tpl, lcaf, &ret);
     kh_val(db->tpl->htable, k) = entry;
     return(OOR_LOG(LDBG_3, "_add_ftpl_entry: FTPL added!"););
 }
@@ -408,11 +407,11 @@ _rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
 	ftuple_t *tpl=db->tpl;
 
 
-    k = kh_get(ftpl,tpl->htable, lcaf);
-    if (k == kh_end(tpl->htable)){
+    k = kh_get(ftpl,db->tpl, lcaf);
+    if (k == kh_end(db->tpl)){
         return;
     }
-    return(kh_del(ftpl,db->tpl->htable,k));
+    return(kh_del(ftpl,db->tpl,k));
 }
 
 
