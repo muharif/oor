@@ -742,7 +742,7 @@ lcaf_ftpl_get_srcpref(lcaf_addr_t *ftpl)
     return(ftpl_type_get_srcpref(lcaf_addr_get_ftpl(ftpl)));
 }
 
-inline lisp_addr_t *
+inline lisp_addr_t
 lcaf_ftpl_get_dstpref(lcaf_addr_t *ftpl)
 {
     assert(ftpl);
