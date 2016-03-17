@@ -25,7 +25,7 @@
 #include "lisp_messages.h"
 
 
-#define MAX_LCAFS 16
+#define MAX_LCAFS 17
 
 typedef struct _lisp_addr_t lisp_addr_t;
 
