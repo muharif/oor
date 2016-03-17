@@ -813,7 +813,7 @@ uint32_t
 lisp_tuple_hash(lisp_addr_t *lsp)
 {
     lcaf_addr_t *lcaf;
-    ftuple_t *tuple;
+    ftuple_t tuple;
     int hash = 0;
     int len = 0;
     lcaf = lisp_addr_get_lcaf(lsp);
@@ -867,8 +867,8 @@ lisp_tuple_cmp(lisp_addr_t *lsp1, lisp_addr_t *lsp2)
 {
     lcaf_addr_t *lcaf1;
     lcaf_addr_t *lcaf2;
-    packet_tuple_t *t1;
-	packet_tuple_t *t2;
+    ftuple_t t1;
+    ftuple_t t2;
     lcaf1 = lisp_addr_get_lcaf(lsp1);
     lcaf2 = lisp_addr_get_lcaf(lsp2);
 
@@ -888,7 +888,7 @@ lisp_tuple_cmp(lisp_addr_t *lsp1, lisp_addr_t *lsp2)
            && t1->dst_port == t2->dst_port
            && (lisp_addr_cmp(&t1->src_addr, &t2->src_addr) == 0)
            && (lisp_addr_cmp(&t1->dst_addr, &t2->dst_addr) == 0)
-           && t1->iid == t2->iid);
+           && t1->protocol == t2->protocol);
 
 	return 0;
 }
