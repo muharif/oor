@@ -532,8 +532,6 @@ typedef struct _lcaf_ftpl_hdr_t{
 	uint32_t	protocol;
     uint16_t	src_mlen;
     uint16_t	dst_mlen;
-    lisp_addr_t	*src_pref;
-    lisp_addr_t	*dst_pref;
 } __attribute__ ((__packed__)) lcaf_ftpl_hdr_t;
 
 
