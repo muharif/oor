@@ -50,7 +50,7 @@ parse_fct parse_fcts[MAX_LCAFS] = {
         iid_type_parse, 0, 0, 0,
         geo_type_parse, 0, 0,
         mc_type_parse, elp_type_parse, 0, 0,
-        rle_type_parse, 0, 0, 0};
+        rle_type_parse, 0, 0, ftpl_type_parse};
 
 to_char_fct to_char_fcts[MAX_LCAFS] = {
         0, afi_list_type_to_char,
@@ -820,19 +820,31 @@ ftpl_type_del(void *ftpl)
 }
 
 inline void
-ftpl_type_set_mlen(ftpl_t *ftpl, uint16_t mlen)
+ftpl_type_set_src_mlen(ftpl_t *ftpl, uint16_t mlen)
 {
     assert(ftpl);
     ftpl->src_mlen = mlen;
+}
+
+inline void
+ftpl_type_set_dst_mlen(ftpl_t *ftpl, uint16_t mlen)
+{
+    assert(ftpl);
     ftpl->dst_mlen = mlen;
 }
 
 inline void
-ftpl_type_set_port(ftpl_t *ftpl, uint16_t port)
+ftpl_type_set_src_port(ftpl_t *ftpl, uint16_t port)
 {
     assert(ftpl);
     ftpl->src_lp = port;
     ftpl->src_up = port;
+}
+
+inline void
+ftpl_type_set_dst_port(ftpl_t *ftpl, uint16_t port)
+{
+    assert(ftpl);
     ftpl->dst_lp = port;
     ftpl->dst_up = port;
 }
@@ -861,20 +873,22 @@ ftpl_type_set_dstpref(ftpl_t *ftpl, lisp_addr_t *dstpref)
 }
 
 inline void
-ftpl_type_set(ftpl_t *dst, lisp_addr_t *src_pref, lisp_addr_t *dst_pref, uint16_t port, uint32_t proto, uint16_t mlen)
+ftpl_type_set(ftpl_t *dst, lisp_addr_t *src_pref, lisp_addr_t *dst_pref, uint16_t src_port, uint16_t dst_port, uint32_t proto, uint16_t src_mlen, uint16_t dst_mlen)
 {
     assert(src_pref);
     assert(dst_pref);
     assert(dst);
     ftpl_type_set_srcpref(dst, src_pref);
     ftpl_type_set_dstpref(dst, dst_pref);
-    ftpl_type_set_port(dst, port);
+    ftpl_type_set_src_port(dst, src_port);
+    ftpl_type_set_dst_port(dst, dst_port);
     ftpl_type_set_proto(dst, proto);
-    ftpl_type_set_mlen(dst, mlen);
+    ftpl_type_set_src_mlen(dst, src_mlen);
+    ftpl_type_set_dst_mlen(dst, dst_mlen);
 }
 
 ftpl_t *
-ftpl_type_init(lisp_addr_t *src_pref, lisp_addr_t *dst_pref, uint16_t port, uint32_t proto, uint16_t mlen)
+ftpl_type_init(lisp_addr_t *src_pref, lisp_addr_t *dst_pref, uint16_t src_port, uint16_t dst_port, uint32_t proto, uint16_t src_mlen, uint16_t dst_mlen)
 {
     ftpl_t *ftpl;
 
@@ -884,9 +898,11 @@ ftpl_type_init(lisp_addr_t *src_pref, lisp_addr_t *dst_pref, uint16_t port, uint
     ftpl = ftpl_type_new();
     lisp_addr_copy(ftpl_type_get_srcpref(ftpl), src_pref);
     lisp_addr_copy(ftpl_type_get_dstpref(ftpl), dst_pref);
-    ftpl_type_set_port(ftpl, port);
-    ftpl_type_set_proto(ftpl, proto);
-    ftpl_type_set_mlen(ftpl, mlen);
+    ftpl_type_set_src_port(dst, src_port);
+    ftpl_type_set_dst_port(dst, dst_port);
+    ftpl_type_set_proto(dst, proto);
+    ftpl_type_set_src_mlen(dst, src_mlen);
+    ftpl_type_set_dst_mlen(dst, dst_mlen);
     return(ftpl);
 }
 
@@ -999,6 +1015,28 @@ ftpl_type_write_to_pkt(uint8_t *offset, void *ftpl)
     lena2 = lisp_addr_write(cur_ptr, ftpl_type_get_dstpref(ftpl));
     ((lcaf_ftpl_hdr_t *)offset)->len = htons(lena1+lena2+8*sizeof(uint8_t));
     return(sizeof(lcaf_ftpl_hdr_t)+lena1+lena2);
+}
+
+int
+ftpl_type_parse(uint8_t *offset, void **ftpl)
+{
+    int srclen, dstlen;
+    srclen = dstlen =0;
+
+    *ftpl = ftpl_type_new();
+
+    ftpl_type_set_src_port(*ftpl, ((lcaf_ftpl_hdr_t *)offset)->src_lp);
+    ftpl_type_set_dst_port(*ftpl, ((lcaf_ftpl_hdr_t *)offset)->dst_lp);
+    ftpl_type_set_proto(*ftpl, ((lcaf_ftpl_hdr_t *)offset)->protocol);
+    ftpl_type_set_src_mlen(*ftpl, ((lcaf_ftpl_hdr_t *)offset)->src_mlen);
+    ftpl_type_set_dst_mlen(*ftpl, ((lcaf_ftpl_hdr_t *)offset)->dst_mlen);
+
+    offset = CO(offset, sizeof(lcaf_ftpl_hdr_t));
+    srclen = lisp_addr_parse(offset, ftpl_type_get_srcpref(ftpl));
+    offset = CO(offset, srclen);
+    dstlen = lisp_addr_parse(offset, ftpl_type_get_dstpref(ftpl));
+    return(sizeof(lcaf_ftpl_hdr_t) + srclen + grplen);
+
 }
 
 

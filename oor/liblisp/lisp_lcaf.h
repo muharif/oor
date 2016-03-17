@@ -201,13 +201,15 @@ inline uint16_t			lcaf_ftpl_get_src_mlen(lcaf_addr_t *ftpl);
 inline uint16_t			lcaf_ftpl_get_dst_mlen(lcaf_addr_t *ftpl);
 inline ftpl_t 			*ftpl_type_new();
 inline void				ftpl_type_del(void *ftpl);
-inline void				ftpl_type_set_mlen(ftpl_t *ftpl, uint16_t mlen);
-inline void				ftpl_type_set_port(ftpl_t *ftpl, uint16_t port);
+inline void				ftpl_type_set_src_mlen(ftpl_t *ftpl, uint16_t mlen);
+inline void				ftpl_type_set_dst_mlen(ftpl_t *ftpl, uint16_t mlen);
+inline void				ftpl_type_set_src_port(ftpl_t *ftpl, uint16_t port);
+inline void				ftpl_type_set_dst_port(ftpl_t *ftpl, uint16_t port);
 inline void				ftpl_type_set_proto(ftpl_t *ftpl, uint32_t proto);
 inline void				ftpl_type_set_srcpref(void *ftpl, lisp_addr_t *srcpref);
 inline void				ftpl_type_set_dstpref(ftpl_t *ftpl, lisp_addr_t *dstpref);
-inline void				ftpl_type_set(ftpl_t *dst, lisp_addr_t *src_pref, lisp_addr_t *dst_pref, uint16_t port, uint32_t proto, uint16_t mlen);
-ftpl_t *				ftpl_type_init(lisp_addr_t *src_pref, lisp_addr_t *dst_pref, uint16_t port, uint32_t proto, uint16_t mlen);
+inline void				ftpl_type_set(ftpl_t *dst, lisp_addr_t *src_pref, lisp_addr_t *dst_pref, uint16_t src_port, uint16_t dst_port, uint32_t proto, uint16_t src_mlen, uint16_t dst_mlen);
+ftpl_t *				ftpl_type_init(lisp_addr_t *src_pref, lisp_addr_t *dst_pref, uint16_t src_port, uint16_t dst_port, uint32_t proto, uint16_t src_mlen, uint16_t dst_mlen);
 inline lisp_addr_t 		*ftpl_type_get_srcpref(ftpl_t *ftpl);
 inline lisp_addr_t 		*ftpl_type_get_dstpref(ftpl_t *ftpl);
 inline uint16_t			ftpl_type_get_srclp(ftpl_t *ftpl);
@@ -220,6 +222,7 @@ inline uint16_t			ftpl_type_get_dst_mlen(ftpl_t *ftpl);
 char 					*ftpl_type_to_char(void *ftpl);
 int						ftpl_type_get_size_to_write(void *ftpl);
 inline int				ftpl_type_write_to_pkt(uint8_t *offset, void *ftpl);
+int						ftpl_type_parse(uint8_t *offset, void **ftpl);
 
 
 
