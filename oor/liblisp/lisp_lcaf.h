@@ -190,8 +190,8 @@ inline int              lisp_addr_is_mcinfo(lisp_addr_t *addr);
  * tpl type functions
  */
 
-inline lisp_addr_t 		*lcaf_ftpl_get_srcpref(lcaf_addr_t *ftpl);
-inline lisp_addr_t 		*lcaf_ftpl_get_dstpref(lcaf_addr_t *ftpl);
+inline lisp_addr_t 		lcaf_ftpl_get_srcpref(lcaf_addr_t *ftpl);
+inline lisp_addr_t *	lcaf_ftpl_get_dstpref(lcaf_addr_t *ftpl);
 inline uint16_t			lcaf_ftpl_get_srclp(lcaf_addr_t *ftpl);
 inline uint16_t			lcaf_ftpl_get_srcup(lcaf_addr_t *ftpl);
 inline uint16_t			lcaf_ftpl_get_dstlp(lcaf_addr_t *ftpl);

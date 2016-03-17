@@ -20,7 +20,6 @@
 #include "lisp_address.h"
 #include "../lib/util.h"
 #include "../lib/oor_log.h"
-#include "../elibs/bob/lookup3.c"
 
 
 static inline lm_afi_t get_lafi_(lisp_addr_t *laddr);

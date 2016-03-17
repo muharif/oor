@@ -733,7 +733,7 @@ mc_type_get_ip_pref_addr (void *mc)
  * ftp_t functions
  */
 
-inline lisp_addr_t *
+inline lisp_addr_t
 lcaf_ftpl_get_srcpref(lcaf_addr_t *ftpl)
 {
     assert(ftpl);
