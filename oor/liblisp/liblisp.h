@@ -25,6 +25,7 @@
 #include "lisp_mapping.h"
 #include "lisp_messages.h"
 #include "lisp_data.h"
+#include "lisp_lcaf.h"
 #include "../lib/generic_list.h"
 #include "../lib/lbuf.h"
 
