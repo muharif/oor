@@ -37,6 +37,15 @@
 #define LISP_CONTROL_PORT               4342
 #define LISP_DATA_PORT                  4341
 
+typedef struct ftuple {
+    lisp_addr_t                     *src_addr;
+    lisp_addr_t                     *dst_addr;
+    uint16_t                        src_port;
+    uint16_t                        dst_port;
+    uint8_t                         protocol;
+    uint32_t                        iid;
+} ftuple_t;
+
 
 lisp_msg_type_e lisp_msg_type(lbuf_t *);
 int lisp_msg_parse_addr(lbuf_t *, lisp_addr_t *);
