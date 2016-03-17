@@ -59,8 +59,14 @@ struct _lisp_addr_t {
     };
 };
 
-#include "../lib/packets.h"
-
+typedef struct {
+    lisp_addr_t                     src_addr;
+    lisp_addr_t                     dst_addr;
+    uint16_t                        src_port;
+    uint16_t                        dst_port;
+    uint8_t                         protocol;
+    uint32_t                        iid;
+} ftuple_t;
 
 
 inline lisp_addr_t *lisp_addr_new();
