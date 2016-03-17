@@ -397,7 +397,7 @@ _add_ftpl_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
 
     k = kh_put(ftpl, db->htable, lcaf, &ret);
     kh_val(db->htable, k) = entry;
-    return(entry);
+    return 0;
 }
 
 static void *
@@ -409,7 +409,7 @@ _rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
     if (k == kh_end(db->htable)){
         return;
     }
-    return(kh_del(ftpl,db->htable,k));
+    kh_del(ftpl,db->htable,k)
 }
 
 
