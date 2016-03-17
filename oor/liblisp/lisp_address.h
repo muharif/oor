@@ -23,7 +23,7 @@
 #include "lisp_ip.h"
 #include "lisp_lcaf.h"
 #include "lisp_messages.h"
-#include "../lib/packets.h"
+
 
 
 /*
@@ -58,6 +58,8 @@ struct _lisp_addr_t {
         lm_afi_t        lafi;
     };
 };
+
+#include "../lib/packets.h"
 
 
 
