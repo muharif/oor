@@ -71,14 +71,14 @@ copy_fct copy_fcts[MAX_LCAFS] = {
         iid_type_copy, 0, 0, 0,
         geo_type_copy, 0, 0,
         mc_type_copy, elp_type_copy, 0, 0,
-        rle_type_copy, 0, 0, 0};
+        rle_type_copy, 0, 0, ftpl_type_copy};
 
 cmp_fct cmp_fcts[MAX_LCAFS] = {
         0, afi_list_type_cmp,
         iid_type_cmp, 0, 0, 0,
         0, 0, 0,
         mc_type_cmp, elp_type_cmp, 0, 0,
-        rle_type_cmp, 0, 0, 0};
+        rle_type_cmp, 0, 0, 0, ftpl_type_cmp};
 
 size_in_pkt_fct size_in_pkt_fcts[MAX_LCAFS] = {
         0, afi_list_type_get_size_to_write,
@@ -1036,6 +1036,40 @@ ftpl_type_parse(uint8_t *offset, void **ftpl)
     offset = CO(offset, srclen);
     dstlen = lisp_addr_parse(offset, ftpl_type_get_dstpref(*ftpl));
     return(sizeof(lcaf_ftpl_hdr_t) + srclen + dstlen);
+
+}
+
+inline void
+ftpl_type_copy(void **dst, void *src)
+{
+    if (!(*dst))
+        *dst = mc_type_new();
+
+    ftpl_type_set_src_port(*dst, ftpl_type_get_srclp(src));
+    ftpl_type_set_dst_port(*dst, ftpl_type_get_dstlp(src));
+    ftpl_type_set_proto(*dst, ftpl_type_get_proto(src));
+    ftpl_type_set_src_mlen(*dst, ftpl_type_get_src_mlen(src));
+    ftpl_type_set_dst_mlen(*dst, ftpl_type_get_dst_mlen(src));
+    lisp_addr_copy(ftpl_type_get_srcpref(*dst), ftpl_type_get_srcpref(src));
+    lisp_addr_copy(ftpl_type_get_dstpref(*dst), ftpl_type_get_dstpref(src));
+}
+
+inline int
+ftpl_type_cmp(void *ftpl1, void *ftpl2)
+{
+    if (    (ftpl_type_get_srclp(ftpl1) != ftpl_type_get_srclp(ftpl2)) ||
+            (ftpl_type_get_dstlp(ftpl1) != ftpl_type_get_dstlp(ftpl2)) ||
+            (ftpl_type_get_proto(ftpl1) != ftpl_type_get_proto(ftpl2)) ||
+			(ftpl_type_get_src_mlen(ftpl1) != ftpl_type_get_src_mlen(ftpl2)) ||
+			(ftpl_type_get_dst_mlen(ftpl1) != ftpl_type_get_dst_mlen(ftpl2)))
+        return(-1);
+
+
+    int res = lisp_addr_cmp(ftpl_type_get_srcpref(ftpl1), mc_type_get_srcpref(ftpl2));
+    if (res == 0)
+        return(lisp_addr_cmp(ftpl_type_get_dstpref(ftpl1), mc_type_get_grp(ftpl2)));
+    else
+        return(res);
 
 }
 

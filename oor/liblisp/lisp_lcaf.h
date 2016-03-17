@@ -223,6 +223,8 @@ char 					*ftpl_type_to_char(void *ftpl);
 int						ftpl_type_get_size_to_write(void *ftpl);
 inline int				ftpl_type_write_to_pkt(uint8_t *offset, void *ftpl);
 int						ftpl_type_parse(uint8_t *offset, void **ftpl);
+inline int				ftpl_type_cmp(void *ftpl1, void *ftpl2);
+inline void				ftpl_type_copy(void **dst, void *src);
 
 
 
