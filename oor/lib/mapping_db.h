@@ -29,6 +29,7 @@
 #include "int_table.h"
 #include "../elibs/patricia/patricia.h"
 #include "../liblisp/lisp_address.h"
+#include "map_cache_entry.h"
 #include "../elibs/khash/khash.h"
 
 #define NOT_EXACT 0
