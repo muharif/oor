@@ -28,7 +28,7 @@
 #include "../lib/generic_list.h"
 #include "../lib/lbuf.h"
 
-#include "../elibs/bob/lookup3.c"
+//#include "../elibs/bob/lookup3.c"
 
 
 
