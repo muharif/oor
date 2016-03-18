@@ -214,10 +214,10 @@ pkt_push_udp_and_ip(lbuf_t *b, uint16_t sp, uint16_t dp, ip_addr_t *sip,
 inline packet_tuple_t *
 packet_tuple_init()
 {
-	packet_tuple_t *ftpl = calloc(1, sizeof(packet_tuple_t));
-    ftpl->src_addr = lisp_addr_new();
-    ftpl->dst_addr = lisp_addr_new();
-    return(ftpl);
+	//packet_tuple_t *ftpl = calloc(1, sizeof(packet_tuple_t));
+    //ftpl->src_addr = lisp_addr_new();
+    //ftpl->dst_addr = lisp_addr_new();
+    return(xzalloc(sizeof(lisp_addr_t)));
 }
 
 int
