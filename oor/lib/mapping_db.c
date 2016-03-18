@@ -150,7 +150,7 @@ _find_lcaf_node(mdb_t *db, lcaf_addr_t *lcaf, uint8_t exact)
     case LCAF_MCAST_INFO:
         return (pt_find_mc_node(get_mc_pt_from_lcaf(db, lcaf),
                 lcaf, exact));
-    case LCAF:
+    case LCAF_FTPL:
     	return(_find_ftpl_node(db, lcaf, exact));
     default:
         OOR_LOG(LWRN, "_find_lcaf_node: Unknown LCAF type %u",
