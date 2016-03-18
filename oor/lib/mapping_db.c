@@ -416,7 +416,7 @@ _rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
 }
 
 static fwd_info_t *
-_find_ftpl_node(mdb_t *db, lcaf_addr_t *iidaddr, uint8_t exact)
+_find_ftpl_node(mdb_t *db, lcaf_addr_t *lcaf, uint8_t exact)
 {
     khiter_t k;
 
