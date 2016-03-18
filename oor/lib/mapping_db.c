@@ -421,10 +421,10 @@ _find_ftpl_node(mdb_t *db, lcaf_addr_t *iidaddr, uint8_t exact)
     khiter_t k;
 
     k = kh_get(ftpl,db->htable, lcaf);
-    if (k == kh_end(tt->htable)){
+    if (k == kh_end(db->htable)){
         return (NULL);
     }
-    return(kh_value(tt->htable,k));
+    return(kh_value(db->htable,k));
 }
 
 
