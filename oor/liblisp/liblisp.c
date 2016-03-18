@@ -913,3 +913,86 @@ lisp_tuple_cmp(lisp_addr_t *lsp1, lisp_addr_t *lsp2)
 
 	return 0;
 }
+
+uint32_t
+lcaf_tuple_hash(lcaf_addr_t *lcaf)
+{
+    packet_tuple_t *tuple;
+    int hash = 0;
+    int len = 0;
+    tuple=packet_tuple_init();
+    lisp_addr_copy(&(tuple->src_addr),lcaf_ftpl_get_srcpref(lcaf));
+    lisp_addr_copy(&(tuple->dst_addr),lcaf_ftpl_get_dstpref(lcaf));
+    tuple->src_port=lcaf_ftpl_get_srclp(lcaf);
+    tuple->dst_port=lcaf_ftpl_get_dstlp(lcaf);
+    tuple->protocol=lcaf_ftpl_get_proto(lcaf);
+    int port = tuple->src_port;
+    uint32_t *tuples = NULL;
+
+    port = port + ((int)tuple->dst_port << 16);
+    switch (lisp_addr_ip_afi(&tuple->src_addr)){
+    case AF_INET:
+        /* 1 integer src_addr
+         * + 1 integer dst_adr
+         * + 1 integer (ports)
+         * + 1 integer protocol
+         * + 1 iid*/
+        len = 5;
+        tuples = xmalloc(len * sizeof(uint32_t));
+        lisp_addr_copy_to(&tuples[0], &tuple->src_addr);
+        lisp_addr_copy_to(&tuples[1], &tuple->dst_addr);
+        tuples[2] = port;
+        tuples[3] = tuple->protocol;
+        break;
+    case AF_INET6:
+        /* 4 integer src_addr
+         * + 4 integer dst_adr
+         * + 1 integer (ports)
+         * + 1 integer protocol
+         * + 1 iid */
+        len = 11;
+        tuples = xmalloc(len * sizeof(uint32_t));
+        lisp_addr_copy_to(&tuples[0], &tuple->src_addr);
+        lisp_addr_copy_to(&tuples[4], &tuple->dst_addr);
+        tuples[8] = port;
+        tuples[9] = tuple->protocol;
+        break;
+    }
+
+    /* XXX: why 2013 used as initial value? */
+    hash = hashword(tuples, len, 2013);
+    free(tuples);
+    return (hash);
+
+}
+
+int
+lcaf_tuple_cmp(lcaf_addr_t *lcaf1, lcaf_addr_t *lcaf2)
+{
+    packet_tuple_t *t1;
+    packet_tuple_t *t2;
+
+    t1=packet_tuple_init();
+    t2=packet_tuple_init();
+
+    lisp_addr_copy(&(t1->src_addr),lcaf_ftpl_get_srcpref(lcaf1));
+    lisp_addr_copy(&(t1->dst_addr),lcaf_ftpl_get_dstpref(lcaf1));
+	t1->src_port=lcaf_ftpl_get_srclp(lcaf1);
+	t1->dst_port=lcaf_ftpl_get_dstlp(lcaf1);
+	t1->protocol=lcaf_ftpl_get_proto(lcaf1);
+
+    lisp_addr_copy(&(t2->src_addr),lcaf_ftpl_get_srcpref(lcaf2));
+    lisp_addr_copy(&(t2->dst_addr),lcaf_ftpl_get_dstpref(lcaf2));
+	t2->src_port=lcaf_ftpl_get_srclp(lcaf2);
+	t2->dst_port=lcaf_ftpl_get_dstlp(lcaf2);
+	t2->protocol=lcaf_ftpl_get_proto(lcaf2);
+
+	return(t1->src_port == t2->src_port
+           && t1->dst_port == t2->dst_port
+           && (lisp_addr_cmp(&t1->src_addr, &t2->src_addr) == 0)
+           && (lisp_addr_cmp(&t1->dst_addr, &t2->dst_addr) == 0)
+           && t1->protocol == t2->protocol);
+
+	return 0;
+}
+

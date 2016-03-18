@@ -94,6 +94,9 @@ char *laddr_list_to_char(glist_t *l);
 uint32_t	lisp_tuple_hash(lisp_addr_t *lsp);
 int 	lisp_tuple_cmp(lisp_addr_t *lsp1, lisp_addr_t *lsp2);
 
+uint32_t	lcaf_tuple_hash(lcaf_addr_t *lcaf);
+int 	lcaf_tuple_cmp(lcaf_addr_t *lcaf1, lisp_addr_t *lcaf2);
+
 static inline void
 lisp_msg_destroy(lbuf_t *b)
 {

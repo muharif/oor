@@ -46,7 +46,7 @@
 
 typedef struct fwd_info_ fwd_info_t;
 
-KHASH_INIT(ftpl, lisp_addr_t *, mcache_entry_t *, 1, lisp_tuple_hash, lisp_tuple_cmp);
+KHASH_INIT(ftpl, lcaf_addr_t *, mcache_entry_t *, 1, lcaf_tuple_hash, lcaf_tuple_cmp);
 
 typedef struct {
     patricia_tree_t *AF4_ip_db;
