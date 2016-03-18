@@ -404,15 +404,13 @@ static void *
 _rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
 {
 	khiter_t k;
-	void del;
 
     k = kh_get(ftpl,db->htable, lcaf);
     if (k == kh_end(db->htable)){
         return 0;
     }
 
-    del=kh_del(ftpl,db->htable,k);
-    return(del);
+    kh_del(ftpl,db->htable,k);
 }
 
 
