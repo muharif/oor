@@ -55,7 +55,7 @@ typedef struct {
     int_htable *AF6_iid_db;
     patricia_tree_t *AF4_mc_db;
     patricia_tree_t *AF6_mc_db;
-    khash_t(ftpl) *ftuple;
+    khash_t(ftpl) *htable;
     int n_entries;
 } mdb_t;
 
