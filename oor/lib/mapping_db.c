@@ -52,7 +52,7 @@ void mdb_for_each_entry_cb(mdb_t *mdb, void (*callback)(void *, void *),
 static int _add_iid_entry(mdb_t *db, void *entry, lcaf_addr_t *iidaddr);
 static void *_rm_iid_entry(mdb_t *db, lcaf_addr_t *iidaddr);
 static patricia_node_t *_find_iid_node(mdb_t *db, lcaf_addr_t *iidaddr, uint8_t exact);
-
+static fwd_info_t *_find_ftpl_node(mdb_t *db, lcaf_addr_t *iidaddr, uint8_t exact);
 /*
  * Return map cache data base
  */
