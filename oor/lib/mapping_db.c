@@ -409,7 +409,9 @@ _rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
     if (k == kh_end(db->htable)){
         return 0;
     }
-    return(kh_del(ftpl,db->htable,k));
+
+    kh_del(ftpl,db->htable,k);
+    return(GOOD);
 }
 
 
