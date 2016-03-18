@@ -395,7 +395,6 @@ void
 ftpl_table_init(mdb_t *db)
 {
     db->htable =  kh_init(ftpl);
-    list_init(&tt->head_list);
 }
 
 static int
