@@ -31,7 +31,7 @@
 #include "../liblisp/lisp_address.h"
 #include "map_cache_entry.h"
 #include "../elibs/khash/khash.h"
-#include "../liblisp/liblisp.h"
+//#include "../liblisp/liblisp.h"
 
 
 #define NOT_EXACT 0
