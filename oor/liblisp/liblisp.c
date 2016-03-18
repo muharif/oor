@@ -835,8 +835,8 @@ lisp_tuple_hash(lisp_addr_t *lsp)
     int len = 0;
     tuple=packet_tuple_init();
     lcaf = lisp_addr_get_lcaf(lsp);
-    //tuple->src_addr=lcaf_ftpl_get_srcpref(lcaf);
-    //tuple->dst_addr=lcaf_ftpl_get_dstpref(lcaf);
+    tuple->src_addr=lcaf_ftpl_get_srcpref(lcaf);
+    tuple->dst_addr=lcaf_ftpl_get_dstpref(lcaf);
     tuple->src_port=lcaf_ftpl_get_srclp(lcaf);
     tuple->dst_port=lcaf_ftpl_get_dstlp(lcaf);
     tuple->protocol=lcaf_ftpl_get_proto(lcaf);
