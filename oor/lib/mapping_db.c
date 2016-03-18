@@ -391,11 +391,11 @@ _rm_mc_entry(mdb_t *db, lcaf_addr_t *mcaddr)
  * tpl
  */
 
-void
+/*void
 ftpl_table_init(mdb_t *db)
 {
     db->htable =  kh_init(ftpl);
-}
+}*/
 
 static int
 _add_ftpl_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
