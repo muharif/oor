@@ -836,8 +836,8 @@ lisp_tuple_hash(lisp_addr_t *lsp)
     int hash = 0;
     int len = 0;
     lcaf = lisp_addr_get_lcaf(lsp);
-    tuple->src_addr=lcaf_ftpl_get_srcpref(lcaf);
-    tuple->dst_addr=lcaf_ftpl_get_dstpref(lcaf);
+    //tuple->src_addr=lcaf_ftpl_get_srcpref(lcaf);
+    //tuple->dst_addr=lcaf_ftpl_get_dstpref(lcaf);
     tuple->src_port=lcaf_ftpl_get_srclp(lcaf);
     tuple->dst_port=lcaf_ftpl_get_dstlp(lcaf);
     tuple->protocol=lcaf_ftpl_get_proto(lcaf);
@@ -891,14 +891,14 @@ lisp_tuple_cmp(lisp_addr_t *lsp1, lisp_addr_t *lsp2)
     lcaf1 = lisp_addr_get_lcaf(lsp1);
     lcaf2 = lisp_addr_get_lcaf(lsp2);
 
-	t1->src_addr=lcaf_ftpl_get_srcpref(lcaf1);
-	t1->dst_addr=lcaf_ftpl_get_dstpref(lcaf1);
+	//t1->src_addr=lcaf_ftpl_get_srcpref(lcaf1);
+	//t1->dst_addr=lcaf_ftpl_get_dstpref(lcaf1);
 	t1->src_port=lcaf_ftpl_get_srclp(lcaf1);
 	t1->dst_port=lcaf_ftpl_get_dstlp(lcaf1);
 	t1->protocol=lcaf_ftpl_get_proto(lcaf1);
 
-	t2->src_addr=lcaf_ftpl_get_srcpref(lcaf2);
-	t2->dst_addr=lcaf_ftpl_get_dstpref(lcaf2);
+	//t2->src_addr=lcaf_ftpl_get_srcpref(lcaf2);
+	//t2->dst_addr=lcaf_ftpl_get_dstpref(lcaf2);
 	t2->src_port=lcaf_ftpl_get_srclp(lcaf2);
 	t2->dst_port=lcaf_ftpl_get_dstlp(lcaf2);
 	t2->protocol=lcaf_ftpl_get_proto(lcaf2);
