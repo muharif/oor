@@ -210,6 +210,16 @@ pkt_push_udp_and_ip(lbuf_t *b, uint16_t sp, uint16_t dp, ip_addr_t *sip,
 
 /* Fill the tuple with the 5 tuples of a packet:
  * (SRC IP, DST IP, PROTOCOL, SRC PORT, DST PORT) */
+
+inline packet_tuple_t *
+packet_tuple_init()
+{
+	packet_tuple_t *ftpl = calloc(1, sizeof(packet_tuple_t));
+    ftpl->src_addr = lisp_addr_new();
+    ftpl->dst_addr = lisp_addr_new();
+    return(ftpl);
+}
+
 int
 pkt_parse_5_tuple(lbuf_t *b, packet_tuple_t *tuple)
 {
