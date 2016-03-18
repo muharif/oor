@@ -835,6 +835,7 @@ lisp_tuple_hash(lisp_addr_t *lsp)
     packet_tuple_t *tuple;
     int hash = 0;
     int len = 0;
+    tuple=packet_tuple_init();
     lcaf = lisp_addr_get_lcaf(lsp);
     //tuple->src_addr=lcaf_ftpl_get_srcpref(lcaf);
     //tuple->dst_addr=lcaf_ftpl_get_dstpref(lcaf);
@@ -890,6 +891,9 @@ lisp_tuple_cmp(lisp_addr_t *lsp1, lisp_addr_t *lsp2)
     packet_tuple_t *t2;
     lcaf1 = lisp_addr_get_lcaf(lsp1);
     lcaf2 = lisp_addr_get_lcaf(lsp2);
+
+    t1=packet_tuple_init();
+    t2=packet_tuple_init();
 
 	//t1->src_addr=lcaf_ftpl_get_srcpref(lcaf1);
 	//t1->dst_addr=lcaf_ftpl_get_dstpref(lcaf1);
