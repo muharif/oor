@@ -23,7 +23,6 @@
 #include "../lib/oor_log.h"
 #include "../lib/packets.h"
 
-
 static void increment_record_count(lbuf_t *b);
 
 lisp_msg_type_e
