@@ -886,8 +886,8 @@ lisp_tuple_cmp(lisp_addr_t *lsp1, lisp_addr_t *lsp2)
 {
     lcaf_addr_t *lcaf1;
     lcaf_addr_t *lcaf2;
-    packet_tuple_t *t1;
-    packet_tuple_t *t2;
+    packet_tuple_t t1;
+    packet_tuple_t t2;
     lcaf1 = lisp_addr_get_lcaf(lsp1);
     lcaf2 = lisp_addr_get_lcaf(lsp2);
 
