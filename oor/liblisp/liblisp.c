@@ -893,14 +893,14 @@ lisp_tuple_cmp(lisp_addr_t *lsp1, lisp_addr_t *lsp2)
     t1=packet_tuple_init();
     t2=packet_tuple_init();
 
-    lisp_addr_copy(&(t1->src_addr),lcaf_ftpl_get_srcpref(lcaf));
-    lisp_addr_copy(&(t1->dst_addr),lcaf_ftpl_get_dstpref(lcaf));
+    lisp_addr_copy(&(t1->src_addr),lcaf_ftpl_get_srcpref(lcaf1));
+    lisp_addr_copy(&(t1->dst_addr),lcaf_ftpl_get_dstpref(lcaf1));
 	t1->src_port=lcaf_ftpl_get_srclp(lcaf1);
 	t1->dst_port=lcaf_ftpl_get_dstlp(lcaf1);
 	t1->protocol=lcaf_ftpl_get_proto(lcaf1);
 
-    lisp_addr_copy(&(t2->src_addr),lcaf_ftpl_get_srcpref(lcaf));
-    lisp_addr_copy(&(t2->dst_addr),lcaf_ftpl_get_dstpref(lcaf));
+    lisp_addr_copy(&(t2->src_addr),lcaf_ftpl_get_srcpref(lcaf2));
+    lisp_addr_copy(&(t2->dst_addr),lcaf_ftpl_get_dstpref(lcaf2));
 	t2->src_port=lcaf_ftpl_get_srclp(lcaf2);
 	t2->dst_port=lcaf_ftpl_get_dstlp(lcaf2);
 	t2->protocol=lcaf_ftpl_get_proto(lcaf2);
