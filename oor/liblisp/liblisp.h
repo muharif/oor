@@ -28,9 +28,6 @@
 #include "../lib/generic_list.h"
 #include "../lib/lbuf.h"
 
-//#include "../elibs/bob/lookup3.c"
-
-
 
 #define LISP_DATA_HDR_LEN       8
 #define LISP_ECM_HDR_LEN        4
