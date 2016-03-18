@@ -410,8 +410,8 @@ _rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
         return 0;
     }
 
-    kh_del(ftpl,db->htable,k);
-    return(GOOD);
+    del=kh_del(ftpl,db->htable,k);
+    return(del);
 }
 
 
