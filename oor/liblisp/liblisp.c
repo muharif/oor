@@ -830,7 +830,7 @@ uint32_t
 lisp_tuple_hash(lisp_addr_t *lsp)
 {
     lcaf_addr_t *lcaf;
-    packet_tuple_t *tuple;
+    packet_tuple_t tuple;
     int hash = 0;
     int len = 0;
     tuple=packet_tuple_init();
