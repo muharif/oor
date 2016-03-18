@@ -389,7 +389,7 @@ _rm_mc_entry(mdb_t *db, lcaf_addr_t *mcaddr)
  * tpl
  */
 
-/*static int
+static int
 _add_ftpl_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
 {
 	khiter_t k;
@@ -411,7 +411,7 @@ _rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
     }
     kh_del(ftpl,db->htable,k);
 }
-*/
+
 
 
 
