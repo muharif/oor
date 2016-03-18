@@ -22,7 +22,7 @@
 #include "../lib/hmac.h"
 #include "../lib/oor_log.h"
 #include "../lib/packets.h"
-//#include "../elibs/bob/lookup3.c"
+#include "../elibs/bob/lookup3.c"
 
 
 static void increment_record_count(lbuf_t *b);
