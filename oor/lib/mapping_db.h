@@ -48,7 +48,6 @@ typedef struct fwd_info_ fwd_info_t;
 
 KHASH_INIT(ftpl, lisp_addr_t , mcache_entry_t *, 1, lisp_tuple_hash, lisp_tuple_cmp);
 
-
 typedef struct {
     patricia_tree_t *AF4_ip_db;
     patricia_tree_t *AF6_ip_db;
@@ -56,7 +55,7 @@ typedef struct {
     int_htable *AF6_iid_db;
     patricia_tree_t *AF4_mc_db;
     patricia_tree_t *AF6_mc_db;
-    khash_t(ftpl) *htable;
+    khash_t(ftpl) *ftuple;
     int n_entries;
 } mdb_t;
 
@@ -70,6 +69,7 @@ void *mdb_remove_entry(mdb_t *db, lisp_addr_t *laddr);
 void *mdb_lookup_entry(mdb_t *db, lisp_addr_t *laddr);
 void *mdb_lookup_entry_exact(mdb_t *db, lisp_addr_t *laddr);
 inline int mdb_n_entries(mdb_t *);
+void	ftpl_table_init(mdb_t *db)
 
 
 patricia_tree_t *_get_local_db_for_lcaf_addr(mdb_t *db, lcaf_addr_t *lcaf);
