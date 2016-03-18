@@ -37,9 +37,6 @@
 #define LISP_CONTROL_PORT               4342
 #define LISP_DATA_PORT                  4341
 
-typedef struct _lisp_addr_t lisp_addr_t;
-
-
 lisp_msg_type_e lisp_msg_type(lbuf_t *);
 int lisp_msg_parse_addr(lbuf_t *, lisp_addr_t *);
 int lisp_msg_parse_eid_rec(lbuf_t *, lisp_addr_t *);
