@@ -150,6 +150,8 @@ _find_lcaf_node(mdb_t *db, lcaf_addr_t *lcaf, uint8_t exact)
     case LCAF_MCAST_INFO:
         return (pt_find_mc_node(get_mc_pt_from_lcaf(db, lcaf),
                 lcaf, exact));
+    case LCAF:
+    	return(_find_ftpl_node(db, lcaf, exact));
     default:
         OOR_LOG(LWRN, "_find_lcaf_node: Unknown LCAF type %u",
                 lcaf_addr_get_type(lcaf));
@@ -411,6 +413,18 @@ _rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
     }
 
     kh_del(ftpl,db->htable,k);
+}
+
+static fwd_info_t *
+_find_ftpl_node(mdb_t *db, lcaf_addr_t *iidaddr, uint8_t exact)
+{
+    khiter_t k;
+
+    k = kh_get(ftpl,db->htable, lcaf);
+    if (k == kh_end(tt->htable)){
+        return (NULL);
+    }
+    return(kh_value(tt->htable,k));
 }
 
 
