@@ -387,7 +387,7 @@ _rm_mc_entry(mdb_t *db, lcaf_addr_t *mcaddr)
 
 /*
  * tpl
- *
+ */
 
 static int
 _add_ftpl_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
@@ -410,7 +410,7 @@ _rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
         return 0;
     }
     kh_del(ftpl,db->htable,k);
-}*/
+}
 
 
 
@@ -423,8 +423,8 @@ _add_lcaf_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
         return (_add_iid_entry(db, entry, lcaf));
     case LCAF_MCAST_INFO:
         return (_add_mc_entry(db, entry, lcaf));
-    /*case LCAF_FTPL:
-    	return (_add_ftpl_entry(db, entry, lcaf));*/
+    case LCAF_FTPL:
+    	return (_add_ftpl_entry(db, entry, lcaf));
     default:
         OOR_LOG(LDBG_3, "_add_lcaf_entry: LCAF type %d not supported!",
                 lcaf_addr_get_type(lcaf));
@@ -440,8 +440,8 @@ _del_lcaf_entry(mdb_t *db, lcaf_addr_t *lcaf)
         return (_rm_iid_entry(db,lcaf));
     case LCAF_MCAST_INFO:
         return (_rm_mc_entry(db,lcaf));
-    /*case LCAF_FTPL:
-    	return (_rm_ftpl_entry(db, lcaf));*/
+    case LCAF_FTPL:
+    	return (_rm_ftpl_entry(db, lcaf));
     default:
         OOR_LOG(LDBG_3, "_del_lcaf_entry: called with unknown LCAF type:%u",
                 lcaf_addr_get_type(lcaf));
