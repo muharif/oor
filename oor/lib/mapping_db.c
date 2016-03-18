@@ -404,6 +404,7 @@ static void *
 _rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
 {
 	khiter_t k;
+	void del;
 
     k = kh_get(ftpl,db->htable, lcaf);
     if (k == kh_end(db->htable)){
