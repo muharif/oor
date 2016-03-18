@@ -391,12 +391,6 @@ _rm_mc_entry(mdb_t *db, lcaf_addr_t *mcaddr)
  * tpl
  */
 
-/*void
-ftpl_table_init(mdb_t *db)
-{
-    db->htable =  kh_init(ftpl);
-}*/
-
 static int
 _add_ftpl_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
 {
@@ -415,7 +409,7 @@ _rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
 
     k = kh_get(ftpl,db->htable, lcaf);
     if (k == kh_end(db->htable)){
-        return 0;
+        return;
     }
 
     kh_del(ftpl,db->htable,k);
@@ -432,9 +426,6 @@ _find_ftpl_node(mdb_t *db, lcaf_addr_t *lcaf, uint8_t exact)
     }
     return(kh_value(db->htable,k));
 }
-
-
-
 
 static int
 _add_lcaf_entry(mdb_t *db, void *entry, lcaf_addr_t *lcaf)
