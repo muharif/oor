@@ -141,7 +141,7 @@ _find_ip_node(mdb_t *db, lisp_addr_t *laddr, uint8_t exact)
     }
 }
 
-static patricia_node_t *
+static void *
 _find_lcaf_node(mdb_t *db, lcaf_addr_t *lcaf, uint8_t exact)
 {
     switch (lcaf_addr_get_type(lcaf)) {
