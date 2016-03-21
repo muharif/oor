@@ -413,6 +413,7 @@ _rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
     }
 
     kh_del(ftpl,db->htable,k);
+    EXIT_SUCCESS;
 }
 
 static void *
