@@ -409,13 +409,13 @@ _rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
 
     k = kh_get(ftpl,db->htable, lcaf);
     if (k == kh_end(db->htable)){
-        return;
+        return 0;
     }
 
     kh_del(ftpl,db->htable,k);
 }
 
-static fwd_info_t *
+static mdb_t *
 _find_ftpl_node(mdb_t *db, lcaf_addr_t *lcaf, uint8_t exact)
 {
     khiter_t k;
