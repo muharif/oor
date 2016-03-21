@@ -1083,7 +1083,7 @@ lcaf_addr_set_ftpl(lcaf_addr_t *lcaf, lisp_addr_t *src_pref, lisp_addr_t *dst_pr
         lcaf_addr_del_addr(lcaf);
     }
 
-    mc = mc_type_init(src_pref, dst_pref, src_port, dst_port, proto, src_mlen, dst_mlen);
+    ftpl = ftpl_type_init(src_pref, dst_pref, src_port, dst_port, proto, src_mlen, dst_mlen);
     lcaf_addr_set_type(lcaf, LCAF_FTPL);
     lcaf_addr_set_addr(lcaf, ftpl);
     return(GOOD);
