@@ -225,7 +225,9 @@ inline int				ftpl_type_write_to_pkt(uint8_t *offset, void *ftpl);
 int						ftpl_type_parse(uint8_t *offset, void **ftpl);
 inline int				ftpl_type_cmp(void *ftpl1, void *ftpl2);
 inline void				ftpl_type_copy(void **dst, void *src);
-
+int						lcaf_addr_set_ftpl(lcaf_addr_t *lcaf, lisp_addr_t *src_pref, lisp_addr_t *dst_pref, uint16_t src_port, uint16_t dst_port, uint32_t proto, uint16_t src_mlen, uint16_t dst_mlen);
+lisp_addr_t 			*lisp_addr_build_ftpl(lisp_addr_t *src_pref, lisp_addr_t *dst_pref, uint16_t src_port, uint16_t dst_port, uint32_t proto, uint16_t src_mlen, uint16_t dst_mlen);
+inline int				lisp_addr_is_ftplinfo(lisp_addr_t *addr);
 
 
 /*

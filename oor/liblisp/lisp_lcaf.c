@@ -1073,6 +1073,39 @@ ftpl_type_cmp(void *ftpl1, void *ftpl2)
 
 }
 
+int
+lcaf_addr_set_ftpl(lcaf_addr_t *lcaf, lisp_addr_t *src_pref, lisp_addr_t *dst_pref,
+		uint16_t src_port, uint16_t dst_port, uint32_t proto, uint16_t src_mlen, uint16_t dst_mlen)
+{
+    ftpl_t            *ftpl;
+
+    if (get_addr_(lcaf)) {
+        lcaf_addr_del_addr(lcaf);
+    }
+
+    mc = mc_type_init(src_pref, dst_pref, src_port, dst_port, proto, src_mlen, dst_mlen);
+    lcaf_addr_set_type(lcaf, LCAF_FTPL);
+    lcaf_addr_set_addr(lcaf, ftpl);
+    return(GOOD);
+}
+
+lisp_addr_t *
+lisp_addr_build_ftpl(lisp_addr_t *src_pref, lisp_addr_t *dst_pref, uint16_t src_port,
+		uint16_t dst_port, uint32_t proto, uint16_t src_mlen, uint16_t dst_mlen)
+{
+    lisp_addr_t     *ftplid;
+
+    ftplid = lisp_addr_new_lafi(LM_AFI_LCAF);
+    lcaf_addr_set_ftpl(lisp_addr_get_lcaf(ftplid), src_pref, dst_pref, src_port, dst_port, proto ,src_mlen, dst_mlen);
+    return(ftplid);
+}
+
+inline int
+lisp_addr_is_ftplinfo(lisp_addr_t *addr)
+{
+    return(lisp_addr_lafi(addr) == LM_AFI_LCAF && lisp_addr_lcaf_type(addr) == LCAF_FTPL);
+}
+
 
 
 /*
