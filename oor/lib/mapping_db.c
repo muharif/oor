@@ -415,7 +415,7 @@ _rm_ftpl_entry(mdb_t *db, lcaf_addr_t *lcaf)
     kh_del(ftpl,db->htable,k);
 }
 
-static mdb_t *
+static fwd_info_t *
 _find_ftpl_node(mdb_t *db, lcaf_addr_t *lcaf, uint8_t exact)
 {
     khiter_t k;
