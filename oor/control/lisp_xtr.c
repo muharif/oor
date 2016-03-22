@@ -375,6 +375,9 @@ tr_recv_map_request(lisp_xtr_t *xtr, lbuf_t *buf, uconn_t *uc)
     /* local copy of the buf that can be modified */
     b = *buf;
 
+    pkt_parse_5_tuple(b, tuple);
+    OOR_LOG(LDBG_1, "packet_tuple_22: %", tuple);
+
     seid = lisp_addr_new();
     deid = lisp_addr_new();
 
