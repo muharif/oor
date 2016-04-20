@@ -84,8 +84,6 @@ static inline void mcache_entry_set_routing_info(mcache_entry_t *, void *,
 static inline mapping_t *
 mcache_entry_mapping(mcache_entry_t* mce)
 {
-	OOR_LOG(LDBG_2, "jembut with EID % already exists, replacing!",
-	            mce);
 	return (mce->mapping);
 }
 
