@@ -68,6 +68,7 @@ mcache_remove_entry(map_cache_db_t *mcdb, lisp_addr_t *key)
 mcache_entry_t *
 mcache_lookup(map_cache_db_t *mcdb, lisp_addr_t *laddr)
 {
+	system("/home/arif/testgrpc/helloworld/greeter_client jancuk1");
     return(mdb_lookup_entry(mcdb->db, laddr));
 }
 
