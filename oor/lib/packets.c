@@ -317,7 +317,7 @@ pkt_tuple_hash(packet_tuple_t *tuple)
     /* XXX: why 2013 used as initial value? */
     hash = hashword(tuples, len, 2013);
     free(tuples);
-    snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client %c", lisp_addr_to_char(tuple->src_addr));
+    snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client %s", lisp_addr_to_char(&tuple->src_addr));
     system(command);
     return (hash);
 
