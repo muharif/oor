@@ -46,11 +46,6 @@ tun_read_and_decap_pkt(int sock, lbuf_t *b, uint32_t *iid)
         return(BAD);
     }
 
-    OOR_LOG(LDBG_1, "zembrits %s", ip_addr_to_char(pkt_pull_ip(b)));
-   /* char command[256];
-    snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client '%s'", ip_addr_to_char(pkt_pull_ip(b)));
-    system(command);*/
-
     if (afi == AF_INET){
         /* With input RAW UDP sockets in IPv4, we get the whole external
          * IPv4 packet */
