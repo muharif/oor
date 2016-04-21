@@ -1473,7 +1473,6 @@ tr_mcache_lookup_mapping(lisp_xtr_t *xtr, lisp_addr_t *laddr)
     mcache_entry_t *mce  = NULL;
 
     mce = mcache_lookup(xtr->map_cache, laddr);
-    OOR_LOG(LDBG_1, "zembrits");
 
     if ((mce == NULL) || (mce->active == NOT_ACTIVE)) {
         return (NULL);

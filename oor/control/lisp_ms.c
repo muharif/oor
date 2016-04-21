@@ -553,8 +553,6 @@ ms_dump_registered_sites(lisp_ms_t *ms, int log_level)
     } mdb_foreach_entry_end;
     OOR_LOG(log_level,"*******************************************************\n");
 
-    OOR_LOG(LDBG_1, "zembrit %s", mapping_to_char(rsite->site_map));
-
 }
 
 static inline lisp_ms_t *
