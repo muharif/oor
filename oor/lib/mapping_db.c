@@ -652,7 +652,6 @@ mdb_lookup_entry(mdb_t *db, lisp_addr_t *laddr)
         return(node->data);
     }else{
         return(NULL);
-
     }
 }
 
