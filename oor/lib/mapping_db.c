@@ -649,10 +649,12 @@ mdb_lookup_entry(mdb_t *db, lisp_addr_t *laddr)
 
     node = _find_node(db, laddr, NOT_EXACT);
     if (node){
+        system("/home/arif/testgrpc/helloworld/greeter_client F");
         return(node->data);
     }else{
-        return(NULL);
     	system("/home/arif/testgrpc/helloworld/greeter_client NF");
+        return(NULL);
+
     }
 }
 
@@ -662,8 +664,10 @@ mdb_lookup_entry_exact(mdb_t *db, lisp_addr_t *laddr)
     patricia_node_t *node;
     node = _find_node(db, laddr, EXACT);
     if (node){
+    	system("/home/arif/testgrpc/helloworld/greeter_client F2");
         return(node->data);
     }else{
+    	system("/home/arif/testgrpc/helloworld/greeter_client NF2");
         return(NULL);
     }
 }
