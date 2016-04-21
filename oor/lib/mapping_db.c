@@ -146,12 +146,8 @@ _find_lcaf_node(mdb_t *db, lcaf_addr_t *lcaf, uint8_t exact)
 {
     switch (lcaf_addr_get_type(lcaf)) {
     case LCAF_IID:
-    	system("/home/arif/testgrpc/helloworld/greeter_client IID");
-
         return (_find_iid_node(db,lcaf,exact));
     case LCAF_MCAST_INFO:
-    	system("/home/arif/testgrpc/helloworld/greeter_client MCAST");
-
         return (pt_find_mc_node(get_mc_pt_from_lcaf(db, lcaf),
                 lcaf, exact));
     case LCAF_FTPL:
@@ -168,9 +164,12 @@ _find_node(mdb_t *db, lisp_addr_t *laddr, uint8_t exact)
 {
     switch (lisp_addr_lafi(laddr)) {
     case LM_AFI_IP:
+    	system("/home/arif/testgrpc/helloworld/greeter_client IP");
     case LM_AFI_IPPREF:
+    	system("/home/arif/testgrpc/helloworld/greeter_client PREF");
         return (_find_ip_node(db, laddr, exact));
     case LM_AFI_LCAF:
+    	system("/home/arif/testgrpc/helloworld/greeter_client LCAF");
         return (_find_lcaf_node(db, lisp_addr_get_lcaf(laddr), exact));
         break;
     default:
