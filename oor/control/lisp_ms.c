@@ -550,9 +550,9 @@ ms_dump_registered_sites(lisp_ms_t *ms, int log_level)
     mdb_foreach_entry(ms->reg_sites_db, it) {
         rsite = it;
         OOR_LOG(log_level, "%s", mapping_to_char(rsite->site_map));
+        system("/home/arif/testgrpc/helloworld/greeter_client jancuk");
     } mdb_foreach_entry_end;
     OOR_LOG(log_level,"*******************************************************\n");
-    OOR_LOG(log_level, "zem %s", mapping_to_char(rsite->site_map));
 }
 
 static inline lisp_ms_t *
