@@ -96,10 +96,6 @@ forward_mreq(lisp_ms_t *ms, lbuf_t *b, mapping_t *m)
     locator_t *loct = NULL;
     uconn_t fwd_uc;
 
-    char command[256];
-    snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client '%s'", mapping_to_char(m) );
-    system(command);
-
     ctrl = ctrl_dev_ctrl(&(ms->super));
 
     if ((ctrl_supported_afis(ctrl) & IPv4_SUPPORT) != 0){
