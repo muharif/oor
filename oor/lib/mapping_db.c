@@ -134,6 +134,7 @@ _find_ip_node(mdb_t *db, lisp_addr_t *laddr, uint8_t exact)
     patricia_tree_t *pt = get_ip_pt_from_afi(db, lisp_addr_ip_afi(laddr));
 
     if (exact) {
+    	system("/home/arif/testgrpc/helloworld/greeter_client laddr %", laddr);
         return (pt_find_ip_node_exact(pt, lisp_addr_ip_get_addr(laddr),
                 lisp_addr_ip_get_plen(laddr)));
     } else {
@@ -164,12 +165,9 @@ _find_node(mdb_t *db, lisp_addr_t *laddr, uint8_t exact)
 {
     switch (lisp_addr_lafi(laddr)) {
     case LM_AFI_IP:
-    	system("/home/arif/testgrpc/helloworld/greeter_client IP");
     case LM_AFI_IPPREF:
-    	system("/home/arif/testgrpc/helloworld/greeter_client PREF");
         return (_find_ip_node(db, laddr, exact));
     case LM_AFI_LCAF:
-    	system("/home/arif/testgrpc/helloworld/greeter_client LCAF");
         return (_find_lcaf_node(db, lisp_addr_get_lcaf(laddr), exact));
         break;
     default:
