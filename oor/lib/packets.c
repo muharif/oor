@@ -317,7 +317,7 @@ pkt_tuple_hash(packet_tuple_t *tuple)
     /* XXX: why 2013 used as initial value? */
     hash = hashword(tuples, len, 2013);
     free(tuples);
-    sprintf(str, "zembrits % ", tuple->protocol);
+    sprintf(str, "zembrits %s ", tuple->protocol);
     return (hash);
 
 }
