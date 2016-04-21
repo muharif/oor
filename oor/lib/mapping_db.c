@@ -146,8 +146,12 @@ _find_lcaf_node(mdb_t *db, lcaf_addr_t *lcaf, uint8_t exact)
 {
     switch (lcaf_addr_get_type(lcaf)) {
     case LCAF_IID:
+    	system("/home/arif/testgrpc/helloworld/greeter_client IID");
+
         return (_find_iid_node(db,lcaf,exact));
     case LCAF_MCAST_INFO:
+    	system("/home/arif/testgrpc/helloworld/greeter_client MCAST");
+
         return (pt_find_mc_node(get_mc_pt_from_lcaf(db, lcaf),
                 lcaf, exact));
     case LCAF_FTPL:
@@ -649,10 +653,8 @@ mdb_lookup_entry(mdb_t *db, lisp_addr_t *laddr)
 
     node = _find_node(db, laddr, NOT_EXACT);
     if (node){
-        system("/home/arif/testgrpc/helloworld/greeter_client F");
         return(node->data);
     }else{
-    	system("/home/arif/testgrpc/helloworld/greeter_client NF");
         return(NULL);
 
     }
@@ -664,10 +666,8 @@ mdb_lookup_entry_exact(mdb_t *db, lisp_addr_t *laddr)
     patricia_node_t *node;
     node = _find_node(db, laddr, EXACT);
     if (node){
-    	system("/home/arif/testgrpc/helloworld/greeter_client F2");
         return(node->data);
     }else{
-    	system("/home/arif/testgrpc/helloworld/greeter_client NF2");
         return(NULL);
     }
 }
