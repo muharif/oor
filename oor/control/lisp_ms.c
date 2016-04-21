@@ -552,7 +552,7 @@ ms_dump_registered_sites(lisp_ms_t *ms, int log_level)
         OOR_LOG(log_level, "%s", mapping_to_char(rsite->site_map));
     } mdb_foreach_entry_end;
     OOR_LOG(log_level,"*******************************************************\n");
-    OOR_LOG(LDBG_1, "zem %s", mapping_to_char(rsite->site_map));
+    OOR_LOG(log_level, "zem %s", mapping_to_char(rsite->site_map));
 }
 
 static inline lisp_ms_t *
