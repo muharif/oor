@@ -280,6 +280,7 @@ pkt_tuple_hash(packet_tuple_t *tuple)
     int len = 0;
     int port = tuple->src_port;
     uint32_t *tuples = NULL;
+    char command[256];
 
     port = port + ((int)tuple->dst_port << 16);
     switch (lisp_addr_ip_afi(&tuple->src_addr)){
@@ -316,7 +317,8 @@ pkt_tuple_hash(packet_tuple_t *tuple)
     /* XXX: why 2013 used as initial value? */
     hash = hashword(tuples, len, 2013);
     free(tuples);
-    system("/home/arif/testgrpc/helloworld/greeter_client tuple");
+    snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client %i", tuple->protocol);
+    system(command);
     return (hash);
 
 }
