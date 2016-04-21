@@ -134,7 +134,6 @@ _find_ip_node(mdb_t *db, lisp_addr_t *laddr, uint8_t exact)
     patricia_tree_t *pt = get_ip_pt_from_afi(db, lisp_addr_ip_afi(laddr));
 
     if (exact) {
-    	system("/home/arif/testgrpc/helloworld/greeter_client laddr %laddr");
         return (pt_find_ip_node_exact(pt, lisp_addr_ip_get_addr(laddr),
                 lisp_addr_ip_get_plen(laddr)));
     } else {
