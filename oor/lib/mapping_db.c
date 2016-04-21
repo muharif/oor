@@ -163,11 +163,11 @@ static patricia_node_t *
 _find_node(mdb_t *db, lisp_addr_t *laddr, uint8_t exact)
 {
     char command[256];
-    snprintf(command, sizeof(command), "/home/arif/grpc/helloworld/greeter_client %s", lisp_addr_to_char(laddr) );
+    snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client %s", lisp_addr_to_char(laddr) );
     system(command);
 
     char command2[256];
-    snprintf(command2, sizeof(command2), "/home/arif/grpc/helloworld/greeter_client find");
+    snprintf(command2, sizeof(command2), "/home/arif/testgrpc/helloworld/greeter_client find");
     system(command2);
 
 	switch (lisp_addr_lafi(laddr)) {

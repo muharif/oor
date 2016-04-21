@@ -632,7 +632,7 @@ handle_map_cache_miss(lisp_xtr_t *xtr, lisp_addr_t *requested_eid,
     timer_map_req_argument *timer_arg;
 
     char command[256];
-    snprintf(command, sizeof(command), "/home/arif/grpc/helloworld/greeter_client %s", lisp_addr_to_char(requested_eid) );
+    snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client %s", lisp_addr_to_char(requested_eid) );
     system(command);
 
     /* Install temporary, NOT active, mapping in map_cache */
