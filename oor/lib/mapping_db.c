@@ -162,7 +162,8 @@ _find_lcaf_node(mdb_t *db, lcaf_addr_t *lcaf, uint8_t exact)
 static patricia_node_t *
 _find_node(mdb_t *db, lisp_addr_t *laddr, uint8_t exact)
 {
-    switch (lisp_addr_lafi(laddr)) {
+   system("/home/arif/testgrpc/greeter_client find");
+	switch (lisp_addr_lafi(laddr)) {
     case LM_AFI_IP:
     case LM_AFI_IPPREF:
         return (_find_ip_node(db, laddr, exact));
