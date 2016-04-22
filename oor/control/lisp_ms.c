@@ -118,7 +118,7 @@ forward_mreq(lisp_ms_t *ms, lbuf_t *b, mapping_t *m)
     }
 
     char command[256];
-    snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client %s", mapping_to_char(m) );
+    snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client '%s'", mapping_to_char(m) );
     system(command);
 
     OOR_LOG(LDBG_3, "Found xTR with locator %s to forward Encap Map-Request",
