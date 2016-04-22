@@ -181,6 +181,40 @@ mapping_to_char(mapping_t *m)
     return(buf);
 }
 
+char *
+mapping_memcache_to_char(mapping_t *m)
+{
+    glist_t *loct_list = NULL;
+    locator_t *locator = NULL;
+    glist_entry_t * it_list = NULL;
+    glist_entry_t * it_loct = NULL;
+    static char buf[100];
+
+    *buf = '\0';
+    sprintf(buf, "%s,%s,", lisp_addr_to_char(mapping_eid(m)), mapping_ttl(m),
+            mapping_locator_count(m),
+            mapping_action_to_char(mapping_action(m)), mapping_auth(m));
+
+
+    if (m->locator_count > 0) {
+        glist_for_each_entry(it_list,m->locators_lists){
+            loct_list = (glist_t *)glist_entry_data(it_list);
+            if (glist_size(loct_list) == 0){
+                continue;
+            }
+            locator = (locator_t *)glist_first_data(loct_list);
+            if (lisp_addr_is_no_addr(locator_addr(locator)) == TRUE){
+                continue;
+            }
+            glist_for_each_entry(it_loct,loct_list){
+                locator = (locator_t *)glist_entry_data(it_loct);
+                sprintf(buf+strlen(buf), "RLOC: %s", locator_to_char(locator));
+            }
+        }
+    }
+    return(buf);
+}
+
 int
 mapping_add_locator(
 		mapping_t *mapping,
