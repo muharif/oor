@@ -98,14 +98,18 @@ forward_mreq(lisp_ms_t *ms, lbuf_t *b, mapping_t *m)
 
     ctrl = ctrl_dev_ctrl(&(ms->super));
 
-    char buff[256];
-    char command[256];
-    snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client %s", mapping_to_char(m) );
-    FILE *fp = popen(command,"r");
-    while ( fgets( buff, 256, fp ) != NULL ) {
-      printf("test", buff );
-    }
-    pclose(fp);
+    FILE *in;
+    extern FILE *popen();
+    char buff[512];
+
+    if(!(in = popen("ls -a", "r"))){
+    		exit(1);
+    	}
+
+    	while(fgets(buff, sizeof(buff), in)!=NULL){
+    		printf("%s", buff);
+    	}
+    	pclose(in);
 
 
     if ((ctrl_supported_afis(ctrl) & IPv4_SUPPORT) != 0){
