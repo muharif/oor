@@ -207,7 +207,7 @@ mapping_memcache_to_char(mapping_t *m)
             }
             glist_for_each_entry(it_loct,loct_list){
                 locator = (locator_t *)glist_entry_data(it_loct);
-                sprintf(buf+strlen(buf), "RLOC: %s", locator_to_char(locator));
+                sprintf(buf+strlen(buf), "RLOC: %s", lisp_addr_to_char(locator->addr));
             }
         }
     }
