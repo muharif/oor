@@ -51,7 +51,10 @@ mcache_del(map_cache_db_t *mcdb)
 int
 mcache_add_entry(map_cache_db_t *mcdb, lisp_addr_t *key, mcache_entry_t *mce)
 {
-    return(mdb_add_entry(mcdb->db, key, mce));
+    char command[256];
+    snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client '2 %s'", mapping_to_char(mce->mapping) );
+    system(command);
+	return(mdb_add_entry(mcdb->db, key, mce));
 }
 
 void *
