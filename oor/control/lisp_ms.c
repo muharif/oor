@@ -98,7 +98,6 @@ forward_mreq(lisp_ms_t *ms, lbuf_t *b, mapping_t *m)
 
     ctrl = ctrl_dev_ctrl(&(ms->super));
 
-
     if ((ctrl_supported_afis(ctrl) & IPv4_SUPPORT) != 0){
     	loct = get_locator_with_afi(m, AF_INET);
     }
@@ -116,10 +115,6 @@ forward_mreq(lisp_ms_t *ms, lbuf_t *b, mapping_t *m)
     if (lisp_addr_lafi(drloc) == LM_AFI_LCAF) {
         get_etr_from_lcaf(drloc, &drloc);
     }
-
-    char command[256];
-    snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client '%s'", mapping_memcache_to_char(m) );
-    system(command);
 
     OOR_LOG(LDBG_3, "Found xTR with locator %s to forward Encap Map-Request",
             lisp_addr_to_char(drloc));

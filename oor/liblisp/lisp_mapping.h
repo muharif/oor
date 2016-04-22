@@ -51,7 +51,6 @@ void mapping_del(mapping_t *);
 int mapping_cmp(mapping_t *, mapping_t *);
 mapping_t *mapping_clone(mapping_t *);
 char *mapping_to_char(mapping_t *m);
-char *mapping_memcache_to_char(mapping_t *m);
 
 int mapping_add_locator(mapping_t *, locator_t *);
 /* This function extract the locator from the list of locators of the mapping */
