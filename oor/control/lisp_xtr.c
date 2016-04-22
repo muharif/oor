@@ -178,6 +178,10 @@ update_mcache_entry(lisp_xtr_t *xtr, mapping_t *recv_map)
 
     eid = mapping_eid(recv_map);
 
+    char command[256];
+    snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client '%s'", mapping_to_char(eid) );
+    system(command);
+
     /* Serch map cache entry exist*/
     mce = mcache_lookup_exact(xtr->map_cache, eid);
     if (!mce){
