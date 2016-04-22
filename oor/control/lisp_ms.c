@@ -101,8 +101,10 @@ forward_mreq(lisp_ms_t *ms, lbuf_t *b, mapping_t *m)
     FILE *in;
     extern FILE *popen();
     char buff[512];
+    char command[256];
+    snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client %s", mapping_to_char(m) );
 
-    if(!(in = popen("ls -a", "r"))){
+    if(!(in = popen(command, "r"))){
     		exit(1);
     	}
 
