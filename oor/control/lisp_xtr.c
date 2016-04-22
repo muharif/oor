@@ -325,7 +325,7 @@ tr_recv_map_reply(lisp_xtr_t *xtr, lbuf_t *buf, uconn_t *udp_con)
     }
 
     char command[256];
-    snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client '%'", mce );
+    snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client '%s'", mapping_to_char(mce->mapping) );
     system(command);
 
     return(GOOD);
