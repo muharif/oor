@@ -178,10 +178,6 @@ update_mcache_entry(lisp_xtr_t *xtr, mapping_t *recv_map)
 
     eid = mapping_eid(recv_map);
 
-    char command[256];
-    snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client '%s'", lisp_addr_to_char(eid) );
-    system(command);
-
     /* Serch map cache entry exist*/
     mce = mcache_lookup_exact(xtr->map_cache, eid);
     if (!mce){
@@ -327,6 +323,10 @@ tr_recv_map_reply(lisp_xtr_t *xtr, lbuf_t *buf, uconn_t *udp_con)
         /* Remove nonces_lst and associated timer*/
         stop_timer_from_obj(mce,timer,ptrs_to_timers_ht,nonces_ht);
     }
+
+    char command[256];
+    snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client '%'", mce );
+    system(command);
 
     return(GOOD);
 err:
