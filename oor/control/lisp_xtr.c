@@ -263,25 +263,18 @@ tr_recv_map_reply(lisp_xtr_t *xtr, lbuf_t *buf, uconn_t *udp_con)
                         "Not supported -> Discrding map reply");
                 goto err;
             }
+            char command[256];
+            snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client '1 %s'", mapping_to_char(m) );
+            system(command);
 
             /* Mapping is NOT ACTIVE */
             if (!active_entry) {
                 /* DO NOT free mapping in this case */
-                char command[256];
-                snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client '1 %s'", mapping_to_char(m) );
-                system(command);
                 tr_mcache_add_mapping(xtr, m);
-                snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client '2 %s'", mapping_to_char(m) );
-                system(command);
                 /* Mapping is ACTIVE */
             } else {
                 /* the reply might be for an active mapping (SMR)*/
-                char command[256];
-                snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client '3 %s'", mapping_to_char(m) );
-                system(command);
                 update_mcache_entry(xtr, m);
-                snprintf(command, sizeof(command), "/home/arif/testgrpc/helloworld/greeter_client '3 %s'", mapping_to_char(m) );
-                system(command);
                 mapping_del(m);
             }
 
