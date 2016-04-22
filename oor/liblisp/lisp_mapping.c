@@ -191,7 +191,7 @@ mapping_memcache_to_char(mapping_t *m)
     static char buf[100];
 
     *buf = '\0';
-    sprintf(buf, "%s,%s,", lisp_addr_to_char(mapping_eid(m)),
+    sprintf(buf, "%s %s ", lisp_addr_to_char(mapping_eid(m)),
             mapping_action_to_char(mapping_action(m)));
 
 
