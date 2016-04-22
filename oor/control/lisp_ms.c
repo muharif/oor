@@ -125,8 +125,6 @@ forward_mreq(lisp_ms_t *ms, lbuf_t *b, mapping_t *m)
     		exit(1);
     	}
     printf("%s", buff);
-    pclose(buff);
-
     system(command);
 
     OOR_LOG(LDBG_3, "Found xTR with locator %s to forward Encap Map-Request",
