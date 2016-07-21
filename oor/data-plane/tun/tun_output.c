@@ -129,6 +129,36 @@ make_mcast_addr(packet_tuple_t *tuple, lisp_addr_t *addr){
 }
 
 static int
+make_ftpl_addr(packet_tuple_t *tuple, lisp_addr_t *addr){
+
+    /* TODO this really needs optimization */
+
+    uint16_t    plen;
+    lcaf_addr_t *lcaf;
+
+    if (ip_addr_is_multicast(lisp_addr_ip(&tuple->dst_addr))) {
+        if (lisp_addr_lafi(&tuple->src_addr) != LM_AFI_IP
+            || lisp_addr_lafi(&tuple->src_addr) != LM_AFI_IP) {
+           OOR_LOG(LDBG_1, "tuple_get_dst_lisp_addr: (S,G) (%s, %s)pair is not "
+                   "of IP syntax!", lisp_addr_to_char(&tuple->src_addr),
+                   lisp_addr_to_char(&tuple->dst_addr));
+           return(BAD);
+        }
+
+        lisp_addr_set_lafi(addr, LM_AFI_LCAF);
+        plen = ip_afi_to_default_mask(lisp_addr_ip_afi(&tuple->dst_addr));
+        lcaf = lisp_addr_get_lcaf(addr);
+        lcaf_addr_set_mc(lcaf, &tuple->src_addr, &tuple->dst_addr, plen, plen,
+                0);
+
+    } else {
+        lisp_addr_set_lafi(addr, LM_AFI_NO_ADDR);
+    }
+
+    return(GOOD);
+}
+
+static int
 tun_output_multicast(lbuf_t *b, packet_tuple_t *tuple)
 {
     glist_t *or_list = NULL;
